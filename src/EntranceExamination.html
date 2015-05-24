@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>高考专业</title>
+	<link rel="stylesheet" href="style/jquery.mobile-1.4.5.css">
+	<link rel="stylesheet" href="style/theme_zlzw.css">
+	<style type="text/css">
+
+.container .options-row{
+	height: 80px;
+	background: rgba(255,255,255,0.5);
+	margin: 0.1em;
+}
+
+.container .vertical-bar{
+	display: inline-block;
+	background: rgba(255,255,255,0.5);
+	border-radius: 1px;
+	width: 2px;
+	height: 50px;
+	margin: 15px 0px;
+}
+
+.container .options-column{
+	display: inline-block;
+	vertical-align: top;
+	height: 100%;
+}
+
+.container .options-column3{
+	width: 29%;
+}
+
+.container .options-column2{
+	width: 45%;
+}
+
+.container .h100w1{
+	display: inline-block;
+	height: 100%;
+	width: 1px;
+	vertical-align: middle;
+}
+
+.container .option-name{
+	height: 50%;
+	width: 100%;
+	text-align:center;
+	color: rgba(255,255,255,0.9);
+	font-family: Microsoft YaHei,SimHei;
+}
+
+.container .option-value{
+	height: 50%;
+	width: 100%;
+	text-align: center;
+}
+
+.option-value input{
+	width: 100%;
+	background: transparent;
+	border: 0px;
+	text-align: center;
+	color: #fff;
+}
+
+.option-value a{
+	font-size: 12px;
+}
+
+.option-value .select_a{
+	text-decoration: none;
+  	color: #FFF;
+  	font-weight: normal;
+}
+
+.option-value option{
+	font-size: 12px;
+}
+
+#search{
+	background: url(style/images/searchbig.png) center no-repeat;
+  	background-size: 160px 160px;
+  	height: 160px;
+  	border: 0px;
+}
+
+#list li{
+	font-size: 12px;
+}
+	</style>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.5.js"></script>
+	<script>
+		$(function() {
+			//$( "[data-role='navbar']" ).navbar();
+			//$( "[data-role='header'], [data-role='footer']" ).toolbar();
+		});
+	</script>
+</head>
+<body>
+
+<!-- 高考专业 -->
+<div data-role="page" class="bg" id="gkzy">
+	<div data-role="header" data-theme="a">
+		<h1>高考专业</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<div class="container">
+			<div class="options-row">
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span><lable>分数</lable>
+					</div>
+					<div class="option-value">
+						<input data-role="none" id="score">
+					</div>
+				</div>
+				<div class="vertical-bar"></div>
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span><lable>考生省</lable>
+					</div>
+					<div class="option-value">
+						<a href="#popup_student" data-rel="popup" class="select_a"id="student">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						<div data-role="popup" id="popup_student">
+							<select>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="vertical-bar"></div>
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span>学校省
+					</div>
+					<div class="option-value">
+						<a href="#popup_university" data-rel="popup" class="select_a" id="university">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						<div data-role="popup" id="popup_university">
+							<select>
+							</select>
+						</div>						
+					</div>						
+				</div>
+			</div>
+			<div class="options-row">
+				<div class="options-column options-column2">
+					<div class="option-name">
+						<span class="h100w1"></span>学科门类
+					</div>
+					<div class="option-value">
+						<a href="#popup_category" data-rel="popup" class="select_a" id="category">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						<div data-role="popup" id="popup_category">
+							<select>
+							</select>
+						</div>						
+					</div>						
+				</div>
+				<div class="vertical-bar"></div>
+				<div class="options-column options-column2">
+					<div class="option-name">
+						<span class="h100w1"></span>一级学科
+					</div>
+					<div class="option-value">
+						<a href="#popup_level1" data-rel="popup" class="select_a" id="level1">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						<div data-role="popup" id="popup_level1">
+							<select>
+							</select>
+						</div>						
+
+					</div>						
+				</div>
+			</div>
+
+			<p><a href="#popup" class="ui-btn ui-shadow ui-corner-all" data-transition="pop" id="search"></a></p>
+
+			<div id="popMsg" data-role="popup" data-overlay-theme="b" data-corners="false">
+    			<a class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" href="#" data-rel="back">Close</a>
+    			<span style="color:red"></span>
+			</div>
+
+		</div>		
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
+				<li><a href="CareerPath.html" rel="external" class="icon-zlzw icon-2" data-direction="reverse" data-icon="custom">职业路径</a></li>
+				<li><a href="#career_introduction" class="icon-zlzw icon-3" data-direction="reverse" data-icon="custom">职业介绍</a></li>
+				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->	
+</div>
+
+<!-- list page -->
+<div data-role="page" id="popup" class="bg">
+
+	<div data-role="header" data-theme="a"  data-position="fixed">
+		<h1 style="margin-left: 10px; text-align: left;"><a href="#gkzy" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">返回</a></h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		
+		<ul data-role="listview" data-inset="true" id="list">
+			<li>
+				
+			</li>
+		</ul>
+
+	</div><!-- /content -->
+</div><!-- /page popup -->
+<script src="js/zlzw.js"></script>
+<script type="text/javascript">
+
+	var oriData;
+
+	// 学校省
+	var uProvinces = {};
+
+	// 考生所在省 -> 学校省 -> 学科门类 -> 一级学科 
+	var universities = {};
+
+	// 学科门类 -> 一级学科
+	var categories = {};
+
+	// html
+	var scoreEle
+	var studentEle;
+	var universityEle;
+	var categoryEle;
+	var level1Ele;
+
+	function initView(){
+
+		scoreEle = $('#score');
+		studentEle = $('#student');
+		universityEle = $('#university');
+		categoryEle = $('#category');
+		level1Ele = $('#level1');
+
+		// 初始化考生省
+		var studentOpts = '<option></option>';
+		for( var sProvince in universities ){
+			studentOpts += '<option value="' + sProvince + '">' + sProvince + '</option>';
+		}
+		var seleS = $('#popup_student').find('select');
+		seleS.empty();
+		seleS.append( studentOpts);
+		seleS.change(function(){
+			$('#popup_student').popup('close');
+
+			var sProvince = $(this).val();
+
+			studentEle.html( sProvince );
+		});
+
+		// 初始化学校省
+		var universityOpts = '<option></option>';
+		for( var uProvince in uProvinces ){
+			universityOpts += '<option value="' + uProvince + '">' + uProvince + '</option>';
+		}
+		var seleU = $('#popup_university').find('select');
+		seleU.empty();
+		seleU.append( universityOpts);
+		seleU.change(function(){
+			$('#popup_university').popup('close');
+
+			var uProvince = $(this).val();
+
+			universityEle.html( uProvince );
+		});
+		seleU.selectmenu('refresh', true);
+
+		// 初始化学科门类
+		var options = '<option></option>';
+		for( var category in categories ){
+			options += '<option value="' + category + '">' + category + '</option>';
+		}
+		var seleC = $('#popup_category').find('select');
+		seleC.empty();
+		seleC.append(options);
+		
+		var seleL = $('#popup_level1').find('select');
+
+		seleC.change(function(){
+			$('#popup_category').popup('close');
+
+			var category = $(this).val();
+
+			categoryEle.html( category );
+
+			// 初始化一级学科下拉选择框
+			var options = '<option></option>';
+			for( var level1 in categories[category] ){
+				options += '<option value="' + level1 + '">' + level1 + '</option>';
+			}
+			seleL.empty();
+			seleL.append(options);
+			level1Ele.html( '&nbsp;&nbsp;&nbsp;&nbsp;' );
+		});
+
+		seleL.change(function(){
+			$('#popup_level1').popup('close');
+
+			var level1 = $(this).val();
+
+			level1Ele.html( level1 );
+		});
+	}
+
+	/**
+	 * 刷新高考数据
+	 */
+	function refreshData( data ){
+		if( !data || data.length == 0 )return;
+
+		var len = data.length;
+
+		for( var i = 0 ; i < len ; i++ ){
+			var item = data[i];
+
+			// 考生所在省
+			var sProvince = item['kaoShengLocality']; 
+			// 学校所在省
+			var uProvince = item['shengFen'];
+			// 学科门类
+			var category = item['xueKeType'];
+			// 一级学科
+			var level1 = item['oneXueKe'];
+
+			var items = universities;
+
+			items =  getValueSafely(items, sProvince);
+			items =  getValueSafely(items, uProvince);
+			items =  getValueSafely(items, category);
+			items =  getValueSafely(items, level1, []);
+
+			items.push(item);
+
+			// 学科
+			getValueSafely( getValueSafely(categories, category), level1 );
+
+			// 学校省
+			getValueSafely( uProvinces, uProvince);
+		}
+
+	}
+
+	/**
+	 * 获取当前的搜索项
+	 */
+	function getRange(){
+
+		var range = {};
+
+		range.score = scoreEle.val();
+		range.student = studentEle.html();
+		range.university = universityEle.html();
+		range.category = categoryEle.html();
+		range.level1 = level1Ele.html();
+		
+		return range;
+	}
+
+	/**
+	 * 查询结果
+	 */
+	function search(){
+
+		var range = getRange();
+
+		var score = parseInt( range.score );
+
+		var rows = universities[range.student];
+
+		if( rows ){
+			rows = rows[range.university];
+			if( rows ){
+				rows = rows[range.category];
+				if( rows ){
+					rows = rows[range.level1];
+				}
+			}
+		}
+
+		var list = $('#list');
+		list.empty();	
+		if( rows ){
+			var lis = '';
+
+			$.each(rows, function(i, u){
+				if( score >= parseInt(u.averageIntegral) )
+				lis += '<li>学&nbsp;校：' + u.schoolName + '(' + u.year + ')' 
+				     + '<br>平均分：' + u.averageIntegral 
+					 + '<br>专&nbsp;业：' + u.oneXueKe + ' - ' + u.zhuanYeName + '</li>';
+
+			});
+			list.append( lis );
+		}
+		list.listview('refresh');
+	}
+
+	function getValueSafely(item, name, value){
+		if( !item[name] ){
+			if( !value ){
+				item[name] = {};
+			} else{
+				item[name] = value;
+			}
+			
+		}
+
+		return item[name];
+	}
+
+
+
+	$('#search').click(function(e){
+
+		var errMsg = false;
+		var range = getRange();
+
+		console.log( range )
+
+		if( !$.isNumeric(range.score) ){
+			errMsg = '分数必须为整数！';
+		} 
+		else if( !range.student ){
+			errMsg = '请选择考生所在省！';
+		}
+		else if( !range.university ){
+			errMsg = '请选择学校所在省！';
+		}
+		else if( !range.category ){
+			errMsg = '请选择学科门类！';
+		}
+		else if( !range.student ){
+			errMsg = '请选择一级学科！';
+		}
+
+		if( errMsg ){
+			$('#popMsg').find('span').html(errMsg);
+			$('#popMsg').popup('open');
+			$(this).removeClass('ui-btn-active'); // 此时已经带有.ui-btn-active
+			return false;
+		} else{
+			search();
+		}
+	});
+
+	$(document).ready(function(){
+		$.ajax({
+			url: zlzw.url.gkzy,
+            type: "POST",
+            dataType: "json",
+            cache:true,
+            crossDomain : true,
+            success : function(data) {
+            	console.log(data);
+            	oriData = data;
+            	refreshData(data.integralInfos);
+            	initView();
+            },
+            
+            error : function(result) {
+            	console.log( result )
+            }
+		})		
+	});
+
+</script>
+
+</body>
+</html>

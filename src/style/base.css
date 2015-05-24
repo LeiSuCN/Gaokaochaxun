@@ -1,0 +1,89 @@
+html, body, div{ margin: 0px; padding: 0px; }
+
+body{
+	padding-top: 60px;/* .header height */
+	padding-bottom: 60px;/* .bottom_btn_area height */
+}
+
+.bg{
+ 	background: url(images/bg_zlzq_qh_sm.jpg) 50% 0  no-repeat;
+ 	background-color: #2B619D;
+}
+
+.header{
+	background: rgb(34,86,147);
+	position: fixed;
+	top:0px;
+	width: 100%;
+	height: 60px;
+	text-align: center;
+}
+
+.header span{
+	color: #FFF;
+	font-size: 24px;
+	font-family: Microsoft YaHei,SimHei;
+	font-weight: normal;
+	line-height: 60px;
+}
+
+.container{
+}
+
+.container .options-row{
+	height: 80px;
+	background: rgba(255,255,255,0.5);
+	margin: 1em;
+}
+
+.container .vertical-bar{
+	display: inline-block;
+	background: rgba(255,255,255,0.5);
+	border-radius: 1px;
+	width: 2px;
+	height: 50px;
+	margin: 15px 0px;
+}
+
+.container .options-column{
+	display: inline-block;
+	vertical-align: top;
+	height: 100%;
+}
+
+.container .options-column3{
+	width: 31%;
+}
+
+.container .options-column2{
+	width: 48%;
+}
+
+.container .h100w1{
+	display: inline-block;
+	height: 100%;
+	width: 1px;
+	vertical-align: middle;
+}
+
+.container .option-name{
+	height: 50%;
+	width: 100%;
+	text-align:center;
+	color: rgba(255,255,255,0.9);
+	font-family: Microsoft YaHei,SimHei;
+}
+
+.container .option-value{
+	height: 50%;
+	width: 100%;
+}
+
+
+.bottom_btn_area{
+	background: rgb(38,50,68);
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	height: 60px;
+}

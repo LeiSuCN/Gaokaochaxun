@@ -1,0 +1,47 @@
+.bg{
+ 	background: url(images/bg_zlzq_qh_sm.jpg) 50% 0  no-repeat!important;
+ 	background-color: #2B619D!important;
+}
+
+.icon-zlzw{
+	font-weight: normal!important;
+}
+
+.icon-zlzw:after{
+	width: 0px;
+	height: 0px;
+}
+
+.icon-1{
+	background:  url(images/1.png) 50% 20% no-repeat;
+	background-size: 24px 22px; 
+}
+
+.icon-2{
+	background:  url(images/2.png) 50% 20% no-repeat; 
+	background-size: 24px 22px;
+}
+
+.icon-3{
+	background:  url(images/3.png) 50% 20% no-repeat; 
+	background-size: 24px 22px;
+}
+
+.icon-4{
+	background:  url(images/4.png) 50% 20% no-repeat; 
+	background-size: 24px 22px;
+}
+
+.ui-bar-a {
+	background-color: #225693 /*{a-bar-background-color}*/;
+	border-color: #225693 /*{a-bar-border}*/;
+	color: #fff;
+}
+
+.ui-select{
+	margin: 0px;
+}
+
+.ui-header .ui-title{
+	font-family: 'Microsoft YaHei',sans-serif;
+}

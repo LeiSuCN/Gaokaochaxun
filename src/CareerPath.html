@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>职业路径</title>
+	<link rel="stylesheet" href="style/jquery.mobile-1.4.5.css">
+	<link rel="stylesheet" href="style/theme_zlzw.css">
+	<style type="text/css">
+
+.container .options-row{
+	height: 80px;
+	background: rgba(255,255,255,0.5);
+	margin: 0.1em;
+}
+
+.container .vertical-bar{
+	display: inline-block;
+	background: rgba(255,255,255,0.5);
+	border-radius: 1px;
+	width: 2px;
+	height: 50px;
+	margin: 15px 0px;
+}
+
+.container .options-column{
+	display: inline-block;
+	vertical-align: top;
+	height: 100%;
+}
+
+.container .options-column3{
+	width: 29%;
+}
+
+.container .options-column2{
+	width: 45%;
+}
+
+.container .h100w1{
+	display: inline-block;
+	height: 100%;
+	width: 1px;
+	vertical-align: middle;
+}
+
+.container .option-name{
+	height: 50%;
+	width: 100%;
+	text-align:center;
+	color: rgba(255,255,255,0.9);
+	font-family: Microsoft YaHei,SimHei;
+}
+
+.container .option-value{
+	height: 50%;
+	width: 100%;
+	text-align: center;
+}
+
+.option-value input{
+	width: 100%;
+	background: transparent;
+	border: 0px;
+	text-align: center;
+	color: #fff;
+}
+
+.option-value a{
+	font-size: 12px;
+}
+
+.option-value .select_a{
+	text-decoration: none;
+  	color: #FFF;
+  	font-weight: normal;
+}
+
+.option-value option{
+	font-size: 12px;
+}
+
+#search{
+	background: url(style/images/searchbig.png) center no-repeat;
+  	background-size: 160px 160px;
+  	height: 160px;
+  	border: 0px;
+}
+
+#list li{
+	font-size: 12px;
+}
+	</style>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.5.js"></script>
+	<script>
+	</script>
+</head>
+<body>
+
+<!-- 高考专业 -->
+<div data-role="page" class="bg">
+	<div data-role="header" data-theme="a">
+		<h1>职业路径</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<div class="container">
+			<div class="options-row">
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span>学科门类
+					</div>
+					<div class="option-value">
+						<a href="#popup_category" data-rel="popup" class="select_a" id="category">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						<div data-role="popup" id="popup_category">
+							<select>
+							</select>
+						</div>						
+					</div>						
+				</div>
+				<div class="vertical-bar"></div>
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span>一级学科
+					</div>
+					<div class="option-value">
+						<a href="#popup_level1" data-rel="popup" class="select_a" id="level1">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						<div data-role="popup" id="popup_level1">
+							<select>
+							</select>
+						</div>						
+
+					</div>						
+				</div>
+				<div class="vertical-bar"></div>
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span>专业名称
+					</div>
+					<div class="option-value">
+						<a href="#popup_major" data-rel="popup" class="select_a" id="major">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						<div data-role="popup" id="popup_major">
+							<select>
+							</select>
+						</div>						
+
+					</div>						
+				</div>
+			</div>
+
+			<p><a href="#popup" class="ui-btn ui-shadow ui-corner-all" data-transition="pop" id="search"></a></p>
+
+			<div id="popMsg" data-role="popup" data-overlay-theme="b" data-corners="false">
+    			<a class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" href="#" data-rel="back">Close</a>
+    			<span style="color:red"></span>
+			</div>
+
+		</div>		
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="EntranceExamination.html" rel="external" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-2" data-direction="reverse" data-icon="custom">职业路径</a></li>
+				<li><a href="#career_introduction" class="icon-zlzw icon-3" data-direction="reverse" data-icon="custom">职业介绍</a></li>
+				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->	
+</div>
+
+<!-- list page -->
+<div data-role="page" id="popup" class="bg">
+
+	<div data-role="header" data-theme="a"  data-position="fixed">
+		<h1 style="margin-left: 10px; text-align: left;"><a href="#gkzy" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">返回</a></h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		
+		<ul data-role="listview" data-inset="true" id="list">
+			<li>
+				
+			</li>
+		</ul>
+
+	</div><!-- /content -->
+</div><!-- /page popup -->
+<script src="js/zlzw.js"></script>
+<script type="text/javascript">
+
+	var oriData;
+
+	var industries = {};
+
+	var categorySele;
+	var categoryEle;
+	var level1Sele;
+	var level1Ele;
+	var majorSele;
+	var majorEle;
+
+	function initView( rows ){
+
+		categorySele = $('#popup_category').find('select');
+		categoryEle = $('#category');
+		level1Sele = $('#popup_level1').find('select');
+		level1Ele = $('#level1');
+		majorSele = $('#popup_major').find('select');
+		majorEle = $('#major');
+
+
+		$.each(rows, function(i,p){
+			//先去除空格
+			p.attribute2 = $.trim(p.attribute2);
+			p.attribute3 = $.trim(p.attribute3);
+			p.zhuanYe = $.trim(p.zhuanYe);
+			p.industry = $.trim(p.industry);
+
+			var category = zlzw.getValueSafely( industries, p.attribute2);
+			var level1 = zlzw.getValueSafely( category, p.attribute3);
+			var major = zlzw.getValueSafely( level1, p.zhuanYe);
+			var total = zlzw.getValueSafely( major, 'total', 0);
+			var count = zlzw.getValueSafely( major, p.industry, 0);
+
+			industries[p.attribute2][p.attribute3][p.zhuanYe][p.industry]
+				= count + 1;
+
+			industries[p.attribute2][p.attribute3][p.zhuanYe]['total']
+				= total + 1;
+		});
+
+		var opts = '<option></option>';
+
+		$.each(industries, function(category, cv){
+			opts += '<option value="' + category + '">' + category + '</option>';
+			$.each(cv, function(level1, lv){
+				$.each(lv, function(major, mv){
+					var total = mv.total;
+					$.each(mv, function(industry, iv){
+
+						if( industry == 'total' )return;
+
+						mv[industry] = (iv*100/total).toFixed(2) + '%';
+
+					})
+				})
+			})
+		})
+
+		categorySele.empty();
+		categorySele.append( opts );
+
+		categorySele.change(function(){
+			var currentCategory = $(this).val();
+			$('#popup_category').popup('close');
+			categoryEle.html(currentCategory);
+
+			var level1s = industries[currentCategory];
+			var opts = '<option></option>';
+			$.each(level1s, function(level1, lv){
+				opts += '<option value="' + level1 + '">' + level1 + '</option>';
+			});
+			level1Sele.empty();
+			level1Sele.append(opts);
+
+			level1Ele.html('&nbsp;&nbsp;&nbsp;&nbsp;');
+			majorSele.html('&nbsp;&nbsp;&nbsp;&nbsp;');
+		});
+
+		level1Sele.change(function(){
+			var currentCategory = $(this).val();
+			$('#popup_level1').popup('close');
+			level1Ele.html(currentCategory);
+
+			var range = getRange();
+			var values = industries[range.category][range.level1];
+			var opts = '<option></option>';
+			$.each(values, function(major, mv){
+				opts += '<option value="' + major + '">' + major + '</option>';
+			});
+			majorSele.empty();
+			majorSele.append(opts);
+			majorEle.html('&nbsp;&nbsp;&nbsp;&nbsp;');
+		});
+
+		majorSele.change(function(){
+			var currentCategory = $(this).val();
+			$('#popup_major').popup('close');
+			majorEle.html(currentCategory);
+		});
+
+		console.log( industries );
+	}
+
+
+	function getRange(){
+		return {
+			category : categorySele.val(),
+			level1: level1Sele.val(),
+			major: majorSele.val()
+		}
+	}
+	/**
+	 * 查询结果
+	 */
+	function search(){
+
+		var range = getRange();
+
+		var rows = industries[range.category][range.level1][range.major];
+
+		var list = $('#list');
+		list.empty();	
+		if( rows ){
+			var lis = '';
+
+			$.each(rows, function(h, r){
+				if( h == 'total' )return;
+
+				lis += '<li>行业：' + h 
+				     + '<br>比例：' + r;
+
+			});
+			list.append( lis );
+		}
+		list.listview('refresh');
+	}
+
+	$('#search').click(function(e){
+
+		var errMsg = false;
+		var range = getRange();
+
+		if( !range.category ){
+			errMsg = '请选择学科门类！';
+		}
+		else if( !range.level1 ){
+			errMsg = '请选择一级学科！';
+		}
+		else if( !range.major ){
+			errMsg = '请选择专业！';
+		}
+		if( errMsg ){
+			$('#popMsg').find('span').html(errMsg);
+			$('#popMsg').popup('open');
+			$(this).removeClass('ui-btn-active'); // 此时已经带有.ui-btn-active
+			return false;
+		} else{
+			search();
+		}
+	});
+
+	$('.ui-icon-back').click(function(){
+		$('.icon-2').addClass('ui-btn ui-btn-active');
+	})
+
+	$(document).ready(function(){
+
+		zlzw.getData('zylj', 
+			function(data) {
+            	console.log(data);
+            	oriData = data;
+            	initView(data.pesonerInfos);
+            }, 
+            function(result) {
+            	console.log( result )
+            }
+        );	
+	});
+
+</script>
+
+</body>
+</html>
