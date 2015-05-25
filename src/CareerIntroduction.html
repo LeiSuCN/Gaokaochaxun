@@ -6,6 +6,44 @@
 	<title>职业介绍</title>
 	<link rel="stylesheet" href="style/jquery.mobile-1.4.5.css">
 	<link rel="stylesheet" href="style/theme_zlzw.css">
+	<style type="text/css">
+		#list{
+		}
+
+		#list .ui-first-child{
+			background: rgb(246, 246, 246);
+			border: 0px;
+		}
+
+		#list .desc{
+			font-family: 'Microsoft YaHei',sans-serif;
+			font-size: 12px;
+			font-weight: normal;
+		}
+
+		#list .title{
+			font-family: 'Microsoft YaHei',sans-serif;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		#list .author{
+			font-family: 'Microsoft YaHei',sans-serif;
+			font-size: 12px;
+			font-weight: normal;
+		}
+
+		#popup_header h1{
+			font-size: 16px;
+			font-weight: normal;
+
+		}
+
+		#popup_header h5{
+			font-size: 12px;
+			font-weight: normal;
+		}
+	</style>
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.mobile-1.4.5.js"></script>
 </head>
@@ -18,7 +56,7 @@
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
-		<ul data-role="listview" data-inset="true" id="list">
+		<ul data-role="listview" data-inset="true" id="list" >
 			<li>
 				
 			</li>
@@ -40,18 +78,14 @@
 <!-- list page -->
 <div data-role="page" id="popup" class="bg">
 
-	<div data-role="header" data-theme="a"  data-position="fixed">
-		<h1 style="margin-left: 10px; text-align: left;"><a href="#gkzy" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">返回</a></h1>
+	<div data-role="header" data-theme="a"  data-position="fixed" id="popup_header">
+		<a href="#gkzy" data-rel="back" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all" style="background:green;top:1.5em;">返回</a>
+		<h1>金融行业介绍</h1>
+		<h5>职来职往</h5>
 	</div><!-- /header -->
 
-	<div role="main" class="ui-content">
+	<div role="main" class="ui-content" style="background: white;">
 		
-		<ul data-role="listview" data-inset="true" id="list">
-			<li>
-				
-			</li>
-		</ul>
-
 	</div><!-- /content -->
 </div><!-- /page popup -->
 <script src="js/zlzw.js"></script>
@@ -59,23 +93,45 @@
 
 	var oriData;
 
+	var contents = {};
 
 	var list;
 
+	var popupPage;
+
 	function initView( rows ){
+
+		popupPage = $('#popup');
+
+		contents = rows;
 
 		list = $('#list');
 
 		var lis = '';
 		$.each(rows, function(i, zhiye){
 
-			lis += '<li><span>文章简介：' + zhiye.jianJie + '</span><br>'
-				 + '<h1>' + zhiye.tiMu + '</h1>'
-				 + '<span>作者：' + zhiye.zuoZhe + '</span></li>';
+			lis += '<li><a href="#popup" data-transition="pop" class="jump-content" content=' + i + '><span class="desc">文章简介：' + zhiye.jianJie + '</span><br>'
+				 + '<h1 class="title">' + zhiye.tiMu + '</h1>'
+				 + '<span class="author">作者：' + zhiye.zuoZhe + '</span></a></li>';
 
 		})
 		list.append( lis );
 		list.listview('refresh');
+
+
+		$('.jump-content').click(function(e){
+			var i = parseInt( $(this).attr('content') );
+			var content = contents[i];
+			console.log( content.tiMu );
+
+			$('#popup').find('.ui-content').html( content.neiRong );
+
+			$('#popup_header').find('h1').html( content.tiMu );
+			$('#popup_header').find('h5').html( content.zuoZhe );
+
+			$.mobile.changePage( "#popup");
+		});
+	
 	}
 
 	/**
@@ -103,10 +159,6 @@
 		}
 		list.listview('refresh');
 	}
-
-	$('#search').click(function(e){
-
-	});
 
 
 	$(document).ready(function(){

@@ -99,7 +99,7 @@
 			<ul>
 				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
 				<li><a href="CareerPath.html" rel="external" class="icon-zlzw icon-2" data-direction="reverse" data-icon="custom">职业路径</a></li>
-				<li><a href="#career_introduction" class="icon-zlzw icon-3" data-direction="reverse" data-icon="custom">职业介绍</a></li>
+				<li><a href="CareerIntroduction.html" rel="external" class="icon-zlzw icon-3" data-direction="reverse" data-icon="custom">职业介绍</a></li>
 				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
 		</div><!-- /navbar -->
@@ -362,25 +362,24 @@
 		}
 	});
 
-	$(document).ready(function(){
-		$.ajax({
-			url: zlzw.url.gkzy,
-            type: "POST",
-            dataType: "json",
-            cache:true,
-            crossDomain : true,
-            success : function(data) {
+	function load_gkzy(){
+		zlzw.getData('gkzy', 
+			function(data) {
             	console.log(data);
             	oriData = data;
             	refreshData(data.integralInfos);
             	initView();
-            },
-            
-            error : function(result) {
+             }, 
+            function(result) {
             	console.log( result )
             }
-		})		
+        );	
+	}
+
+	$('#gkzy').on('pagecreate',function(){
+		load_gkzy();
 	});
+
 
 </script>
 

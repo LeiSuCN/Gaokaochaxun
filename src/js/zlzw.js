@@ -1,6 +1,8 @@
 (function($){
 
-	top.window.zlzw = top.window.zlzw || {};
+	if( top.window.zlzw ) return; // 防止重复加载
+
+	top.window.zlzw = {};
 
 	var zlzw = top.window.zlzw;
 
@@ -12,6 +14,8 @@
 	zlzw.url.gkzy = zlzw.url.root + '/productSelect.action';
 	// url: 职业路径
 	zlzw.url.zylj = zlzw.url.root + '/allHangYe.action';
+	// url: 职业介绍
+	zlzw.url.zyjs = zlzw.url.root + '/allJieShao.action';
 
 	zlzw.getData = function(id, callbackForSucc, callbackForFail){
 

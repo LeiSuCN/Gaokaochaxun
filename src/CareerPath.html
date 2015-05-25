@@ -11,8 +11,8 @@
 </head>
 <body>
 
-<!-- 高考专业 -->
-<div data-role="page" class="bg">
+<!-- 职业路径  -->
+<div data-role="page" class="bg" id="zylj">
 	<div data-role="header" data-theme="a">
 		<h1>职业路径</h1>
 	</div><!-- /header -->
@@ -77,7 +77,7 @@
 			<ul>
 				<li><a href="EntranceExamination.html" rel="external" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
 				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-2" data-direction="reverse" data-icon="custom">职业路径</a></li>
-				<li><a href="#career_introduction" class="icon-zlzw icon-3" data-direction="reverse" data-icon="custom">职业介绍</a></li>
+				<li><a href="CareerIntroduction.html" rel="external" class="icon-zlzw icon-3" data-direction="reverse" data-icon="custom">职业介绍</a></li>
 				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
 		</div><!-- /navbar -->
@@ -270,7 +270,11 @@
 		$('.icon-2').addClass('ui-btn ui-btn-active');
 	})
 
-	$(document).ready(function(){
+
+	/**
+	 * 职业路径page加载
+	 */
+	function load_zylj(){
 
 		zlzw.getData('zylj', 
 			function(data) {
@@ -282,6 +286,11 @@
             	console.log( result )
             }
         );	
+
+	}
+
+	$('#zylj').on('pagecreate',function(){
+		load_zylj();
 	});
 
 </script>
