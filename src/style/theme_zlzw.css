@@ -32,6 +32,90 @@
 	background-size: 24px 22px;
 }
 
+
+.container .options-row{
+	height: 80px;
+	background: rgba(255,255,255,0.5);
+	margin: 0.1em;
+}
+
+.container .vertical-bar{
+	display: inline-block;
+	background: rgba(255,255,255,0.5);
+	border-radius: 1px;
+	width: 2px;
+	height: 50px;
+	margin: 15px 0px;
+}
+
+.container .options-column{
+	display: inline-block;
+	vertical-align: top;
+	height: 100%;
+}
+
+.container .options-column3{
+	width: 29%;
+}
+
+.container .options-column2{
+	width: 45%;
+}
+
+.container .h100w1{
+	display: inline-block;
+	height: 100%;
+	width: 1px;
+	vertical-align: middle;
+}
+
+.container .option-name{
+	height: 50%;
+	width: 100%;
+	text-align:center;
+	color: rgba(255,255,255,0.9);
+	font-family: Microsoft YaHei,SimHei;
+}
+
+.container .option-value{
+	height: 50%;
+	width: 100%;
+	text-align: center;
+}
+
+.option-value input{
+	width: 100%;
+	background: transparent;
+	border: 0px;
+	text-align: center;
+	color: #fff;
+}
+
+.option-value a{
+	font-size: 12px;
+}
+
+.option-value .select_a{
+	text-decoration: none;
+  	color: #FFF;
+  	font-weight: normal;
+}
+
+.option-value option{
+	font-size: 12px;
+}
+
+#search{
+	background: url(images/searchbig.png) center no-repeat;
+  	background-size: 160px 160px;
+  	height: 160px;
+  	border: 0px;
+}
+
+#list li{
+	font-size: 12px;
+}
+
 .ui-bar-a {
 	background-color: #225693 /*{a-bar-background-color}*/;
 	border-color: #225693 /*{a-bar-border}*/;
@@ -45,3 +129,5 @@
 .ui-header .ui-title{
 	font-family: 'Microsoft YaHei',sans-serif;
 }
+
+

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>职业介绍</title>
+	<link rel="stylesheet" href="style/jquery.mobile-1.4.5.css">
+	<link rel="stylesheet" href="style/theme_zlzw.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.5.js"></script>
+</head>
+<body>
+
+<!-- 高考专业 -->
+<div data-role="page" class="bg">
+	<div data-role="header" data-theme="a">
+		<h1>职业介绍</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<ul data-role="listview" data-inset="true" id="list">
+			<li>
+				
+			</li>
+		</ul>
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="EntranceExamination.html" rel="external" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
+				<li><a href="CareerPath.html" rel="external" class="icon-zlzw icon-2" data-direction="reverse" data-icon="custom">职业路径</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-3" data-direction="reverse" data-icon="custom">职业介绍</a></li>
+				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->	
+</div>
+
+<!-- list page -->
+<div data-role="page" id="popup" class="bg">
+
+	<div data-role="header" data-theme="a"  data-position="fixed">
+		<h1 style="margin-left: 10px; text-align: left;"><a href="#gkzy" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">返回</a></h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		
+		<ul data-role="listview" data-inset="true" id="list">
+			<li>
+				
+			</li>
+		</ul>
+
+	</div><!-- /content -->
+</div><!-- /page popup -->
+<script src="js/zlzw.js"></script>
+<script type="text/javascript">
+
+	var oriData;
+
+
+	var list;
+
+	function initView( rows ){
+
+		list = $('#list');
+
+		var lis = '';
+		$.each(rows, function(i, zhiye){
+
+			lis += '<li><span>文章简介：' + zhiye.jianJie + '</span><br>'
+				 + '<h1>' + zhiye.tiMu + '</h1>'
+				 + '<span>作者：' + zhiye.zuoZhe + '</span></li>';
+
+		})
+		list.append( lis );
+		list.listview('refresh');
+	}
+
+	/**
+	 * 查询结果
+	 */
+	function search(){
+
+		var range = getRange();
+
+		var rows = industries[range.category][range.level1][range.major];
+
+		var list = $('#list');
+		list.empty();	
+		if( rows ){
+			var lis = '';
+
+			$.each(rows, function(h, r){
+				if( h == 'total' )return;
+
+				lis += '<li>行业：' + h 
+				     + '<br>比例：' + r;
+
+			});
+			list.append( lis );
+		}
+		list.listview('refresh');
+	}
+
+	$('#search').click(function(e){
+
+	});
+
+
+	$(document).ready(function(){
+
+		zlzw.getData('zyjs', 
+			function(data) {
+            	console.log(data);
+            	oriData = data;
+            	initView(data.zhiYes);
+            }, 
+            function(result) {
+            	console.log( result )
+            }
+        );	
+	});
+
+</script>
+
+</body>
+</html>
