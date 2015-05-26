@@ -116,6 +116,15 @@
 	font-size: 12px;
 }
 
+body,
+input,
+select,
+textarea,
+button,
+.ui-btn {
+	font-family: 'Microsoft YaHei',sans-serif /*{global-font-family}*/;
+}
+
 .ui-bar-a {
 	background-color: #225693 /*{a-bar-background-color}*/;
 	border-color: #225693 /*{a-bar-border}*/;
