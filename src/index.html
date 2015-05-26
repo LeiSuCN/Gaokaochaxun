@@ -6,6 +6,42 @@
 	<title>职来志趣</title>
 	<link rel="stylesheet" href="style/jquery.mobile-1.4.5.css">
 	<link rel="stylesheet" href="style/theme_zlzw.css">
+	<style type="text/css">
+
+		#zyjs_list .ui-first-child{
+			background: rgb(246, 246, 246);
+			border: 0px;
+		}
+
+		#zyjs_list .desc{
+			font-family: 'Microsoft YaHei',sans-serif;
+			font-size: 12px;
+			font-weight: normal;
+		}
+
+		#zyjs_list .title{
+			font-family: 'Microsoft YaHei',sans-serif;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		#zyjs_list .author{
+			font-family: 'Microsoft YaHei',sans-serif;
+			font-size: 12px;
+			font-weight: normal;
+		}
+
+		#zyjs_popup_header h1{
+			font-size: 16px;
+			font-weight: normal;
+
+		}
+
+		#zyjs_popup_header h5{
+			font-size: 12px;
+			font-weight: normal;
+		}
+	</style>
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.mobile-1.4.5.js"></script>
 </head>
@@ -98,8 +134,8 @@
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
-				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2" data-direction="reverse" data-icon="custom">职业路径</a></li>
-				<li><a href="CareerIntroduction.html" rel="external" class="icon-zlzw icon-3" data-direction="reverse" data-icon="custom">职业介绍</a></li>
+				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2" data-icon="custom">职业路径</a></li>
+				<li><a href="#zyjs"  data-transition="slide" class="icon-zlzw icon-3" data-icon="custom">职业介绍</a></li>
 				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
 		</div><!-- /navbar -->
@@ -171,8 +207,34 @@
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
-				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-2" data-direction="reverse" data-icon="custom">职业路径</a></li>
-				<li><a href="CareerIntroduction.html" data-transition="slide" class="icon-zlzw icon-3" data-direction="reverse" data-icon="custom">职业介绍</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
+				<li><a href="#zyjs" data-transition="slide" class="icon-zlzw icon-3"  data-icon="custom">职业介绍</a></li>
+				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->	
+</div>
+
+<!-- 职业介绍 -->
+<div data-role="page" class="bg" id="zyjs">
+	<div data-role="header" data-theme="a">
+		<h1>职业介绍</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<ul data-role="listview" data-inset="true" id="zyjs_list" >
+			<li>
+				
+			</li>
+		</ul>
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
+				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-3"  data-icon="custom">职业介绍</a></li>
 				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
 		</div><!-- /navbar -->
@@ -212,6 +274,20 @@
 			</li>
 		</ul>
 
+	</div><!-- /content -->
+</div><!-- /page popup -->
+
+<!-- popup#zyjs_popup -->
+<div data-role="page" id="zyjs_popup" class="bg">
+
+	<div data-role="header" data-theme="a"  data-position="fixed" id="zyjs_popup_header">
+		<a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" style="top:1.5em;"></a>
+		<h1></h1>
+		<h5></h5>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content" style="background: white;">
+		
 	</div><!-- /content -->
 </div><!-- /page popup -->
 
@@ -688,7 +764,41 @@
 
 		var oriData;
 
+		var contents = {};
+
 		function initView(){
+
+			popupPage = $('#zyjs_popup');
+	
+			contents = oriData.zhiYes;
+	
+			list = $('#zyjs_list');
+	
+			var lis = '';
+			$.each(contents, function(i, zhiye){
+	
+				lis += '<li><a href="#zyjs_popup" data-transition="pop" class="jump-content" content=' + i + '><span class="desc">文章简介：' + zhiye.jianJie + '</span><br>'
+					 + '<h1 class="title">' + zhiye.tiMu + '</h1>'
+					 + '<span class="author">作者：' + zhiye.zuoZhe + '</span></a></li>';
+	
+			})
+			list.append( lis );
+			list.listview('refresh');
+	
+	
+			$('.jump-content').click(function(e){
+				var i = parseInt( $(this).attr('content') );
+				var content = contents[i];
+				console.log( content.tiMu );
+	
+				$('#zyjs_popup').find('.ui-content').html( content.neiRong );
+	
+				$('#zyjs_popup_header').find('h1').html( content.tiMu );
+				$('#zyjs_popup_header').find('h5').html( content.zuoZhe );
+	
+				$.mobile.changePage( "#zyjs_popup");
+			});
+
 		}
 
 		function getRange(){

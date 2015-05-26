@@ -105,14 +105,16 @@
 	font-size: 12px;
 }
 
-#search{
+.search{
 	background: url(images/searchbig.png) center no-repeat;
+	background-color: transparent!important;
   	background-size: 160px 160px;
   	height: 160px;
   	border: 0px;
+  	box-shadow:none;
 }
 
-#list li{
+.list li{
 	font-size: 12px;
 }
 
@@ -137,6 +139,29 @@ button,
 
 .ui-header .ui-title{
 	font-family: 'Microsoft YaHei',sans-serif;
+	font-weight: normal;
+	text-shadow: none!important ;
 }
 
+.ui-btn-active{
+	background-color: #e46742!important;
+	border-color: #e46742!important;
+	text-shadow: none!important ;
+}
 
+.ui-overlay-a,
+.ui-page-theme-a,
+.ui-page-theme-a .ui-panel-wrapper {
+
+	text-shadow: none;
+}
+
+.ui-body-a,
+.ui-page-theme-a .ui-body-inherit,
+html .ui-bar-a .ui-body-inherit,
+html .ui-body-a .ui-body-inherit,
+html body .ui-group-theme-a .ui-body-inherit,
+html .ui-panel-page-container-a {
+
+	text-shadow: none;
+}
