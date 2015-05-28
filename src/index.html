@@ -136,7 +136,7 @@
 				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
 				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2" data-icon="custom">职业路径</a></li>
 				<li><a href="#zyjs"  data-transition="slide" class="icon-zlzw icon-3" data-icon="custom">职业介绍</a></li>
-				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->	
@@ -209,7 +209,7 @@
 				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
 				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
 				<li><a href="#zyjs" data-transition="slide" class="icon-zlzw icon-3"  data-icon="custom">职业介绍</a></li>
-				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->	
@@ -235,7 +235,35 @@
 				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
 				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
 				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-3"  data-icon="custom">职业介绍</a></li>
-				<li><a href="#me" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->	
+</div>
+
+<!-- 我 -->
+<div data-role="page" class="bg" id="me">
+	<div data-role="header" data-theme="a">
+		<h1>我</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<ul data-role="listview" data-inset="true" id="me_list" >
+			<li><a href="#" data-transition="pop">会员登录</a></li>
+			<li><a href="#" data-transition="pop">关于我们</a></li>
+			<li><a href="#" data-transition="pop">意见反馈</a></li>
+			<li><a href="#" data-transition="pop">联系我们</a></li>
+			<li><a href="#" data-transition="pop">版权说明</a></li>
+		</ul>
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
+				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
+				<li><a href="#zyjs" data-transition="slide" class="icon-zlzw icon-3" data-icon="custom">职业介绍</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->	
@@ -821,6 +849,30 @@
         		 	console.log( result )
         		}
         	);	
+		}
+
+		return {
+			load: load
+		}
+	})();
+
+	// page: 我
+	zlzq.pages.me = (function(){
+
+		var oriData;
+
+		var contents = {};
+
+		function initView(){
+		}
+
+		function getRange(){
+		}
+
+		function load(){
+
+			$('.icon-zlzw').removeClass('ui-btn-active');
+			$('.icon-4').addClass('ui-btn-active');
 		}
 
 		return {

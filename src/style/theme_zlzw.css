@@ -165,3 +165,20 @@ html .ui-panel-page-container-a {
 
 	text-shadow: none;
 }
+
+.ui-icon-carat-r:after {
+  background-image: url(images/icon_more.png);
+  background-size: 2em 2em;
+  background-color: transparent!important;
+}
+
+.ui-icon-carat-l{
+	background: transparent!important;
+  	border: 0px!important;
+}
+
+.ui-icon-carat-l:after {
+  background-image: url(images/icon_back.png)!important;
+  background-size: 2em 2em!important;
+  background-color: transparent!important;
+}
