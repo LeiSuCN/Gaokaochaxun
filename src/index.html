@@ -41,6 +41,59 @@
 			font-size: 12px;
 			font-weight: normal;
 		}
+
+		#gkzy_score{
+			font-size: 12px;
+  			padding: 0px;
+  			line-height: 12px;
+  			vertical-align: top;
+  			position: relative;
+  			top: -2px;
+		}
+
+		.zlzq-select-menu{
+			-webkit-appearance: button;
+			border: 0px;
+  			background: transparent;
+			color: #FFF;
+			font-size: 12px;
+  			font-weight: normal;
+  			max-width: 100%;
+		}
+
+		.ui-select div.ui-btn{
+			padding: 0px;
+  			border: 0px;
+  			border-radius: 0px;
+  			background: transparent;
+  			box-shadow: none;
+  			font-size: 12px;
+  			font-weight: normal;
+  			color: white;
+  			text-shadow: none;
+		}
+
+		.ui-select div.ui-btn:hover{
+			padding: 0px;
+  			border: 0px;
+  			border-radius: 0px;
+  			background: transparent;
+  			box-shadow: none;
+  			font-size: 12px;
+  			font-weight: normal;
+  			color: white;
+  			text-shadow: none;
+		}
+
+		.ui-select .ui-btn-icon-right:after{
+			display: none;
+		}
+
+		.ui-select div.ui-btn span{
+			word-wrap: break-word;
+  			word-break: break-word;
+  			white-space: normal!important;
+		}
 	</style>
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.mobile-1.4.5.js"></script>
@@ -69,12 +122,9 @@
 					<div class="option-name">
 						<span class="h100w1"></span><lable>考生省</lable>
 					</div>
-					<div class="option-value">
-						<a href="#gkzy_popup_student" data-rel="popup" class="select_a"id="gkzy_student">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-						<div data-role="popup" id="gkzy_popup_student">
-							<select>
-							</select>
-						</div>
+					<div class="option-value" id="gkzy_popup_student">
+						<select>
+						</select>
 					</div>
 				</div>
 				<div class="vertical-bar"></div>
@@ -82,12 +132,9 @@
 					<div class="option-name">
 						<span class="h100w1"></span>学校省
 					</div>
-					<div class="option-value">
-						<a href="#gkzy_popup_university" data-rel="popup" class="select_a" id="gkzy_university">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-						<div data-role="popup" id="gkzy_popup_university">
-							<select>
-							</select>
-						</div>						
+					<div class="option-value" id="gkzy_popup_university">
+						<select>
+						</select>					
 					</div>						
 				</div>
 			</div>
@@ -96,12 +143,9 @@
 					<div class="option-name">
 						<span class="h100w1"></span>学科门类
 					</div>
-					<div class="option-value">
-						<a href="#gkzy_popup_category" data-rel="popup" class="select_a" id="gkzy_category">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-						<div data-role="popup" id="gkzy_popup_category">
-							<select>
-							</select>
-						</div>						
+					<div class="option-value" id="gkzy_popup_category">
+						<select>
+						</select>		
 					</div>						
 				</div>
 				<div class="vertical-bar"></div>
@@ -109,13 +153,9 @@
 					<div class="option-name">
 						<span class="h100w1"></span>一级学科
 					</div>
-					<div class="option-value">
-						<a href="#gkzy_popup_level1" data-rel="popup" class="select_a" id="gkzy_level1">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-						<div data-role="popup" id="gkzy_popup_level1">
-							<select>
-							</select>
-						</div>						
-
+					<div class="option-value" id="gkzy_popup_level1">
+						<select>
+						</select>					
 					</div>						
 				</div>
 			</div>
@@ -155,12 +195,9 @@
 					<div class="option-name">
 						<span class="h100w1"></span>学科门类
 					</div>
-					<div class="option-value">
-						<a href="#zylj_popup_category" data-rel="popup" class="select_a" id="zylj_category">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-						<div data-role="popup" id="zylj_popup_category">
-							<select>
-							</select>
-						</div>						
+					<div class="option-value" id="zylj_popup_category">
+						<select>
+						</select>
 					</div>						
 				</div>
 				<div class="vertical-bar"></div>
@@ -168,13 +205,9 @@
 					<div class="option-name">
 						<span class="h100w1"></span>一级学科
 					</div>
-					<div class="option-value">
-						<a href="#zylj_popup_level1" data-rel="popup" class="select_a" id="zylj_level1">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-						<div data-role="popup" id="zylj_popup_level1">
-							<select>
-							</select>
-						</div>						
-
+					<div class="option-value" id="zylj_popup_level1">
+						<select>
+						</select>
 					</div>						
 				</div>
 				<div class="vertical-bar"></div>
@@ -182,13 +215,9 @@
 					<div class="option-name">
 						<span class="h100w1"></span>专业名称
 					</div>
-					<div class="option-value">
-						<a href="#zylj_popup_major" data-rel="popup" class="select_a" id="zylj_major">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-						<div data-role="popup" id="zylj_popup_major">
-							<select>
-							</select>
-						</div>						
-
+					<div class="option-value" id="zylj_popup_major">
+						<select>
+						</select>					
 					</div>						
 				</div>
 			</div>
@@ -382,11 +411,14 @@
 		// 学校省
 		var uProvinces = {};
 
-		// 考生所在省 -> 学校省 -> 学科门类 -> 一级学科 
+		// 考生所在省 -> 学校省 -> 学科门类 -> 一级学科 -> 学校名称 -> 专业
 		var universities = {};
 
 		// 学科门类 -> 一级学科
 		var categories = {};
+
+		// 当前年份
+		var filterYear = (new Date()).getFullYear() - 5;
 
 		function initView(){
 			var data = oriData.integralInfos;
@@ -395,6 +427,10 @@
 	
 			for( var i = 0 ; i < len ; i++ ){
 				var item = data[i];
+
+				// 记录年
+				var year = parseInt( item['year'] );
+				if( year < filterYear )continue;
 	
 				// 考生所在省
 				var sProvince = item['kaoShengLocality']; 
@@ -404,15 +440,23 @@
 				var category = item['xueKeType'];
 				// 一级学科
 				var level1 = item['oneXueKe'];
+				// 学校名称
+				var school = item['schoolName'];
+				// 专业
+				var major = item['zhuanYeName'];
+				// 平均分
+				var score = parseInt(item['averageIntegral'])
 	
 				var items = universities;
 	
 				items =  getValueSafely(items, sProvince);
 				items =  getValueSafely(items, uProvince);
 				items =  getValueSafely(items, category);
-				items =  getValueSafely(items, level1, []);
+				items =  getValueSafely(items, level1);
+				items =  getValueSafely(items, school);
+				items =  getValueSafely(items, major, []);
 	
-				items.push(item);
+				items.push(score);
 	
 				// 学科
 				getValueSafely( getValueSafely(categories, category), level1 );
@@ -420,12 +464,26 @@
 				// 学校省
 				getValueSafely( uProvinces, uProvince);
 			}
+			
+			$.each( universities, function(spn/* 考试省名称 */, spv){
+				$.each( spv, function(upn/* 学校省名称 */, upv){
+					$.each( upv, function(cn/* 学科门类 */, cv){
+						$.each( cv, function(ln/* 一级学科 */, lv){
+							$.each( lv, function(sn/* 学校名称 */, sv){
+								$.each( sv, function(mn/* 专业名称 */, mv){
+									var total = 0;
+									for( var i = 0 ; i < mv.length ; i++ ){
+										total += mv[i];
+									}
+									sv[mn] = parseInt( total / mv.length );
+								})
+							})
+						})
+					})
+				})
+			});
 
 			var scoreEle = $('#gkzy_score');
-			var studentEle = $('#gkzy_student');
-			var universityEle = $('#gkzy_university');
-			var categoryEle = $('#gkzy_category');
-			var level1Ele = $('#gkzy_level1');
 	
 			// 初始化考生省
 			var studentOpts = '<option></option>';
@@ -435,13 +493,7 @@
 			var seleS = $('#gkzy_popup_student').find('select');
 			seleS.empty();
 			seleS.append( studentOpts);
-			seleS.change(function(){
-				$('#gkzy_popup_student').popup('close');
-	
-				var sProvince = $(this).val();
-	
-				studentEle.html( sProvince );
-			});
+			seleS.selectmenu('refresh', true);
 	
 			// 初始化学校省
 			var universityOpts = '<option></option>';
@@ -451,13 +503,6 @@
 			var seleU = $('#gkzy_popup_university').find('select');
 			seleU.empty();
 			seleU.append( universityOpts);
-			seleU.change(function(){
-				$('#gkzy_popup_university').popup('close');
-	
-				var uProvince = $(this).val();
-	
-				universityEle.html( uProvince );
-			});
 			seleU.selectmenu('refresh', true);
 	
 			// 初始化学科门类
@@ -468,15 +513,13 @@
 			var seleC = $('#gkzy_popup_category').find('select');
 			seleC.empty();
 			seleC.append(options);
+			seleC.selectmenu('refresh', true);
 			
 			var seleL = $('#gkzy_popup_level1').find('select');
 	
 			seleC.change(function(){
-				$('#gkzy_popup_category').popup('close');
 	
 				var category = $(this).val();
-	
-				categoryEle.html( category );
 	
 				// 初始化一级学科下拉选择框
 				var options = '<option></option>';
@@ -485,22 +528,14 @@
 				}
 				seleL.empty();
 				seleL.append(options);
-				level1Ele.html( '&nbsp;&nbsp;&nbsp;&nbsp;' );
-			});
-	
-			seleL.change(function(){
-				$('#gkzy_popup_level1').popup('close');
-	
-				var level1 = $(this).val();
-	
-				level1Ele.html( level1 );
+				seleL.selectmenu('refresh', true);
 			});
 
 			$('#gkzy_search').click(function(e){
 		
 				var errMsg = false;
 				var range = getRange();
-		
+
 				console.log( range )
 		
 				if( !$.isNumeric(range.score) ){
@@ -543,13 +578,15 @@
 					list.empty();	
 					if( rows ){
 						var lis = '';
-			
-						$.each(rows, function(i, u){
-							if( score >= parseInt(u.averageIntegral) )
-							lis += '<li>学&nbsp;校：' + u.schoolName + '(' + u.year + ')' 
-							     + '<br>平均分：' + u.averageIntegral 
-								 + '<br>专&nbsp;业：' + u.oneXueKe + ' - ' + u.zhuanYeName +			 '</li>';
-			
+						$.each(rows, function(un/* 学校名称 */, uv){
+							$.each( uv, function(mn/* 专业名称 */, mv){
+								if( score >= mv )
+								lis += '<li>学&nbsp;校：' + un 
+								     + '<br>平均分：' + mv 
+									 + '<br>专&nbsp;业：' + range.level1 + ' - ' + mn 
+									 + '</li>';
+							})
+
 						});
 						list.append( lis );
 					}
@@ -566,18 +603,18 @@
 
 		function getRange(){
 			var scoreEle = $('#gkzy_score');
-			var studentEle = $('#gkzy_student');
-			var universityEle = $('#gkzy_university');
-			var categoryEle = $('#gkzy_category');
-			var level1Ele = $('#gkzy_level1');
+			var studentEle = $('#gkzy_popup_student').find('select');
+			var universityEle = $('#gkzy_popup_university').find('select');
+			var categoryEle = $('#gkzy_popup_category').find('select');
+			var level1Ele = $('#gkzy_popup_level1').find('select');
 			
 			var range = {};
 
 			range.score = scoreEle.val();
-			range.student = studentEle.html();
-			range.university = universityEle.html();
-			range.category = categoryEle.html();
-			range.level1 = level1Ele.html();
+			range.student = studentEle.val();
+			range.university = universityEle.val();
+			range.category = categoryEle.val();
+			range.level1 = level1Ele.val();
 		
 			return range;
 
@@ -618,11 +655,8 @@
 			var rows = oriData.pesonerInfos;
 
 			var categorySele = $('#zylj_popup_category').find('select');
-			var categoryEle = $('#zylj_category');
 			var level1Sele = $('#zylj_popup_level1').find('select');
-			var level1Ele = $('#zylj_level1');
 			var majorSele = $('#zylj_popup_major').find('select');
-			var majorEle = $('#zylj_major');
 	
 	
 			$.each(rows, function(i,p){
@@ -665,12 +699,10 @@
 	
 			categorySele.empty();
 			categorySele.append( opts );
+			categorySele.selectmenu('refresh', true);
 	
 			categorySele.change(function(){
 				var currentCategory = $(this).val();
-				$('#zylj_popup_category').popup('close');
-				categoryEle.html(currentCategory);
-	
 				var level1s = industries[currentCategory];
 				var opts = '<option></option>';
 				$.each(level1s, function(level1, lv){
@@ -678,16 +710,13 @@
 				});
 				level1Sele.empty();
 				level1Sele.append(opts);
-	
-				level1Ele.html('&nbsp;&nbsp;&nbsp;&nbsp;');
+				level1Sele.selectmenu('refresh', true);
+
 				majorSele.html('&nbsp;&nbsp;&nbsp;&nbsp;');
 			});
 	
 			level1Sele.change(function(){
 				var currentCategory = $(this).val();
-				$('#zylj_popup_level1').popup('close');
-				level1Ele.html(currentCategory);
-	
 				var range = getRange();
 				var values = industries[range.category][range.level1];
 				var opts = '<option></option>';
@@ -696,13 +725,7 @@
 				});
 				majorSele.empty();
 				majorSele.append(opts);
-				majorEle.html('&nbsp;&nbsp;&nbsp;&nbsp;');
-			});
-	
-			majorSele.change(function(){
-				var currentCategory = $(this).val();
-				$('#zylj_popup_major').popup('close');
-				majorEle.html(currentCategory);
+				majorSele.selectmenu('refresh', true);
 			});
 
 			$('#zylj_search').click(function(e){
