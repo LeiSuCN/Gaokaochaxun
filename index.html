@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>职来志趣</title>
+	<link rel="stylesheet" href="style/jquery.mobile-1.4.5.css">
+	<link rel="stylesheet" href="style/theme_zlzw.css">
+	<style type="text/css">
+
+		#zyjs_list .ui-first-child{
+			background: rgb(246, 246, 246);
+			border: 0px;
+		}
+
+		#zyjs_list .desc{
+			font-family: 'Microsoft YaHei',sans-serif;
+			font-size: 12px;
+			font-weight: normal;
+		}
+
+		#zyjs_list .title{
+			font-family: 'Microsoft YaHei',sans-serif;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		#zyjs_list .author{
+			font-family: 'Microsoft YaHei',sans-serif;
+			font-size: 12px;
+			font-weight: normal;
+		}
+
+		#zyjs_popup_header h1{
+			font-size: 16px;
+			font-weight: normal;
+
+		}
+
+		#zyjs_popup_header h5{
+			font-size: 12px;
+			font-weight: normal;
+		}
+
+		#gkzy_score{
+			font-size: 12px;
+  			padding: 0px;
+  			line-height: 12px;
+  			vertical-align: top;
+  			position: relative;
+  			top: -2px;
+		}
+
+		.zlzq-select-menu{
+			-webkit-appearance: button;
+			border: 0px;
+  			background: transparent;
+			color: #FFF;
+			font-size: 12px;
+  			font-weight: normal;
+  			max-width: 100%;
+		}
+
+		.ui-select div.ui-btn{
+			padding: 0px;
+  			border: 0px;
+  			border-radius: 0px;
+  			background: transparent;
+  			box-shadow: none;
+  			font-size: 12px;
+  			font-weight: normal;
+  			color: white;
+  			text-shadow: none;
+		}
+
+		.ui-select div.ui-btn:hover{
+			padding: 0px;
+  			border: 0px;
+  			border-radius: 0px;
+  			background: transparent;
+  			box-shadow: none;
+  			font-size: 12px;
+  			font-weight: normal;
+  			color: white;
+  			text-shadow: none;
+		}
+
+		.ui-select .ui-btn-icon-right:after{
+			display: none;
+		}
+
+		.ui-select div.ui-btn span{
+			word-wrap: break-word;
+  			word-break: break-word;
+  			white-space: normal!important;
+		}
+	</style>
+</head>
+<body>
+
+<!-- 高考专业 -->
+<div data-role="page" class="bg" id="gkzy">
+	<div data-role="header" data-theme="a">
+		<h1>高考专业</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<div class="container">
+			<div class="options-row">
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span><lable>分数</lable>
+					</div>
+					<div class="option-value">
+						<input data-role="none" id="gkzy_score">
+					</div>
+				</div>
+				<div class="vertical-bar"></div>
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span><lable>考生省</lable>
+					</div>
+					<div class="option-value" id="gkzy_popup_student">
+						<select>
+                            <option></option>
+						</select>
+					</div>
+				</div>
+				<div class="vertical-bar"></div>
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span>学校省
+					</div>
+					<div class="option-value" id="gkzy_popup_university">
+						<select>
+                            <option></option>
+						</select>					
+					</div>						
+				</div>
+			</div>
+			<div class="options-row">
+				<div class="options-column options-column2">
+					<div class="option-name">
+						<span class="h100w1"></span>学科门类
+					</div>
+					<div class="option-value" id="gkzy_popup_category">
+						<select>
+                            <option></option>
+						</select>		
+					</div>						
+				</div>
+				<div class="vertical-bar"></div>
+				<div class="options-column options-column2">
+					<div class="option-name">
+						<span class="h100w1"></span>一级学科
+					</div>
+					<div class="option-value" id="gkzy_popup_level1">
+						<select>
+                            <option></option>
+						</select>					
+					</div>						
+				</div>
+			</div>
+
+			<p><a href="#gkzy_popup" class="ui-btn ui-shadow ui-corner-all search" data-transition="pop" id="gkzy_search"></a></p>
+
+			<div id="gkzy_popMsg" data-role="popup" data-overlay-theme="b" data-corners="false">
+    			<a class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" href="#" data-rel="back">Close</a>
+    			<span style="color:red"></span>
+			</div>
+
+		</div>		
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
+				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2" data-icon="custom">职业路径</a></li>
+				<li><a href="#zyjs"  data-transition="slide" class="icon-zlzw icon-3" data-icon="custom">职业介绍</a></li>
+				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->	
+</div>
+
+<!-- 职业路径  -->
+<div data-role="page" class="bg" id="zylj">
+	<div data-role="header" data-theme="a">
+		<h1>职业路径</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<div class="container">
+			<div class="options-row">
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span>学科门类
+					</div>
+					<div class="option-value" id="zylj_popup_category">
+						<select>
+                            <option></option>
+						</select>
+					</div>						
+				</div>
+				<div class="vertical-bar"></div>
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span>一级学科
+					</div>
+					<div class="option-value" id="zylj_popup_level1">
+						<select>
+                            <option></option>
+						</select>
+					</div>						
+				</div>
+				<div class="vertical-bar"></div>
+				<div class="options-column options-column3">
+					<div class="option-name">
+						<span class="h100w1"></span>专业名称
+					</div>
+					<div class="option-value" id="zylj_popup_major">
+						<select>
+                            <option></option>
+						</select>					
+					</div>						
+				</div>
+			</div>
+
+			<p><a href="#zylj_popup" class="ui-btn ui-shadow ui-corner-all search" data-transition="pop" id="zylj_search"></a></p>
+
+			<div id="zylj_popMsg" data-role="popup" data-overlay-theme="b" data-corners="false">
+    			<a class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" href="#" data-rel="back">Close</a>
+    			<span style="color:red"></span>
+			</div>
+
+		</div>		
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
+				<li><a href="#zyjs" data-transition="slide" class="icon-zlzw icon-3"  data-icon="custom">职业介绍</a></li>
+				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->	
+</div>
+
+<!-- 职业介绍 -->
+<div data-role="page" class="bg" id="zyjs">
+	<div data-role="header" data-theme="a">
+		<h1>职业介绍</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<ul data-role="listview" data-inset="true" id="zyjs_list" >
+			<li>
+				
+			</li>
+		</ul>
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
+				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-3"  data-icon="custom">职业介绍</a></li>
+				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->	
+</div>
+
+<!-- 我 -->
+<div data-role="page" class="bg" id="me">
+	<div data-role="header" data-theme="a">
+		<h1>我</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<ul data-role="listview" data-inset="true" id="me_list" >
+			<li><a href="#" data-transition="pop">会员登录</a></li>
+			<li><a href="#" data-transition="pop">关于我们</a></li>
+			<li><a href="#" data-transition="pop">意见反馈</a></li>
+			<li><a href="#" data-transition="pop">联系我们</a></li>
+			<li><a href="#" data-transition="pop">版权说明</a></li>
+		</ul>
+	</div>
+
+	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
+				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
+				<li><a href="#zyjs" data-transition="slide" class="icon-zlzw icon-3" data-icon="custom">职业介绍</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-4" data-icon="custom">我</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->	
+</div>
+
+<!-- popup#gkzy_popup -->
+<div data-role="page" id="gkzy_popup" class="bg">
+
+	<div data-role="header" data-theme="a"  data-position="fixed">
+		<h1 style="margin-left: 10px; text-align: left;"><a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">返回</a></h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		
+		<ul data-role="listview" data-inset="true" id="gkzy_list">
+			<li>
+				
+			</li>
+		</ul>
+
+	</div><!-- /content -->
+</div><!-- /page popup -->
+
+<!-- popup#zylj_popup -->
+<div data-role="page" id="zylj_popup" class="bg">
+
+	<div data-role="header" data-theme="a"  data-position="fixed">
+		<h1 style="margin-left: 10px; text-align: left;"><a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">返回</a></h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		
+		<ul data-role="listview" data-inset="true" class="list" id="zylj_list">
+			<li>
+				
+			</li>
+		</ul>
+
+	</div><!-- /content -->
+</div><!-- /page popup -->
+
+<!-- popup#zyjs_popup -->
+<div data-role="page" id="zyjs_popup" class="bg">
+
+	<div data-role="header" data-theme="a"  data-position="fixed" id="zyjs_popup_header">
+		<a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" style="top:1.5em;"></a>
+		<h1></h1>
+		<h5></h5>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content" style="background: white;">
+		
+	</div><!-- /content -->
+</div><!-- /page popup -->
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.mobile-1.4.5.js"></script>
+<script type="text/javascript">
+    app.initialize();
+	function getData(id, callbackForSucc, callbackForFail){
+
+		var url = zlzq.url[id];
+
+		if( !url ){
+			error('非法的数据请求ID[' + id + ']');
+			return;
+		}
+
+		$.ajax({
+			url: url,
+            type: "POST",
+            dataType: "json",
+            cache:true,
+            crossDomain : true,
+            success : function(data) {
+            	callbackForSucc( data );
+            },
+            
+            error : function(result) {
+            	callbackForFail( result );
+            }
+		})		
+	}
+
+	function getValueSafely(item, name, value){
+		if( !item[name] ){
+			if( value == null || value == undefined ){
+				item[name] = {};
+			} else{
+				item[name] = value;
+			}
+			
+		}
+
+		return item[name];
+	}
+
+	zlzq = {};	
+	// url
+	zlzq.url = {};
+	// url: root
+	zlzq.url.root = 'http://115.29.140.45:8081/zlzw-web/MAdminAction';
+	// url: 高考专业
+	zlzq.url.gkzy = zlzq.url.root + '/productSelect.action';
+	// url: 职业路径
+	zlzq.url.zylj = zlzq.url.root + '/allHangYe.action';
+	// url: 职业介绍
+	zlzq.url.zyjs = zlzq.url.root + '/allJieShao.action';
+
+
+
+	zlzq.pages = {};
+
+	// page: 高考专业
+	zlzq.pages.gkzy = (function(){
+
+		var oriData;
+		// 学校省
+		var uProvinces = {};
+
+		// 考生所在省 -> 学校省 -> 学科门类 -> 一级学科 -> 学校名称 -> 专业
+		var universities = {};
+
+		// 学科门类 -> 一级学科
+		var categories = {};
+
+		// 当前年份
+		var filterYear = (new Date()).getFullYear() - 5;
+
+		function initView(){
+			var data = oriData.integralInfos;
+	
+			var len = data.length;
+	
+			for( var i = 0 ; i < len ; i++ ){
+				var item = data[i];
+
+				// 记录年
+				var year = parseInt( item['year'] );
+				if( year < filterYear )continue;
+	
+				// 考生所在省
+				var sProvince = item['kaoShengLocality']; 
+				// 学校所在省
+				var uProvince = item['shengFen'];
+				// 学科门类
+				var category = item['xueKeType'];
+				// 一级学科
+				var level1 = item['oneXueKe'];
+				// 学校名称
+				var school = item['schoolName'];
+				// 专业
+				var major = item['zhuanYeName'];
+				// 平均分
+				var score = parseInt(item['averageIntegral'])
+	
+				var items = universities;
+	
+				items =  getValueSafely(items, sProvince);
+				items =  getValueSafely(items, uProvince);
+				items =  getValueSafely(items, category);
+				items =  getValueSafely(items, level1);
+				items =  getValueSafely(items, school);
+				items =  getValueSafely(items, major, []);
+	
+				items.push(score);
+	
+				// 学科
+				getValueSafely( getValueSafely(categories, category), level1 );
+	
+				// 学校省
+				getValueSafely( uProvinces, uProvince);
+			}
+			
+			$.each( universities, function(spn/* 考试省名称 */, spv){
+				$.each( spv, function(upn/* 学校省名称 */, upv){
+					$.each( upv, function(cn/* 学科门类 */, cv){
+						$.each( cv, function(ln/* 一级学科 */, lv){
+							$.each( lv, function(sn/* 学校名称 */, sv){
+								$.each( sv, function(mn/* 专业名称 */, mv){
+									var total = 0;
+									for( var i = 0 ; i < mv.length ; i++ ){
+										total += mv[i];
+									}
+									sv[mn] = parseInt( total / mv.length );
+								})
+							})
+						})
+					})
+				})
+			});
+
+			var scoreEle = $('#gkzy_score');
+	
+			// 初始化考生省
+			var studentOpts = '<option></option>';
+			for( var sProvince in universities ){
+				studentOpts += '<option value="' + sProvince + '">' + sProvince + '</option>';
+			}
+			var seleS = $('#gkzy_popup_student').find('select');
+			seleS.empty();
+			seleS.append( studentOpts);
+			seleS.selectmenu('refresh', true);
+	
+			// 初始化学校省
+			var universityOpts = '<option></option>';
+			for( var uProvince in uProvinces ){
+				universityOpts += '<option value="' + uProvince + '">' + uProvince +	 '</option>';
+			}
+			var seleU = $('#gkzy_popup_university').find('select');
+			seleU.empty();
+			seleU.append( universityOpts);
+			seleU.selectmenu('refresh', true);
+	
+			// 初始化学科门类
+			var options = '<option></option>';
+			for( var category in categories ){
+				options += '<option value="' + category + '">' + category + '</	option>';
+			}
+			var seleC = $('#gkzy_popup_category').find('select');
+			seleC.empty();
+			seleC.append(options);
+			seleC.selectmenu('refresh', true);
+			
+			var seleL = $('#gkzy_popup_level1').find('select');
+	
+			seleC.change(function(){
+	
+				var category = $(this).val();
+	
+				// 初始化一级学科下拉选择框
+				var options = '<option></option>';
+				for( var level1 in categories[category] ){
+					options += '<option value="' + level1 + '">' + level1 + '</	option>';
+				}
+				seleL.empty();
+				seleL.append(options);
+				seleL.selectmenu('refresh', true);
+			});
+
+			$('#gkzy_search').click(function(e){
+		
+				var errMsg = false;
+				var range = getRange();
+
+				console.log( range )
+		
+				if( !$.isNumeric(range.score) ){
+					errMsg = '分数必须为整数！';
+				} 
+				else if( !range.student ){
+					errMsg = '请选择考生所在省！';
+				}
+				else if( !range.university ){
+					errMsg = '请选择学校所在省！';
+				}
+				else if( !range.category ){
+					errMsg = '请选择学科门类！';
+				}
+				else if( !range.student ){
+					errMsg = '请选择一级学科！';
+				}
+		
+				if( errMsg ){
+					$('#gkzy_popMsg').find('span').html(errMsg);
+					$('#gkzy_popMsg').popup('open');
+					$(this).removeClass('ui-btn-active'); // 此时已经带有.ui-btn-active
+					return false;
+				} else{
+					var score = parseInt( range.score );
+			
+					var rows = universities[range.student];
+			
+					if( rows ){
+						rows = rows[range.university];
+						if( rows ){
+							rows = rows[range.category];
+							if( rows ){
+								rows = rows[range.level1];
+							}
+						}
+					}
+			
+					var list = $('#gkzy_list');
+					list.empty();	
+					if( rows ){
+						var lis = '';
+						$.each(rows, function(un/* 学校名称 */, uv){
+							$.each( uv, function(mn/* 专业名称 */, mv){
+								if( score >= mv )
+								lis += '<li>学&nbsp;校：' + un 
+								     + '<br>平均分：' + mv 
+									 + '<br>专&nbsp;业：' + range.level1 + ' - ' + mn 
+									 + '</li>';
+							})
+
+						});
+						list.append( lis );
+					}
+					try{
+						list.listview('refresh');
+					} catch(e){
+
+					}
+				}
+			});
+
+
+		}
+
+		function getRange(){
+			var scoreEle = $('#gkzy_score');
+			var studentEle = $('#gkzy_popup_student').find('select');
+			var universityEle = $('#gkzy_popup_university').find('select');
+			var categoryEle = $('#gkzy_popup_category').find('select');
+			var level1Ele = $('#gkzy_popup_level1').find('select');
+			
+			var range = {};
+
+			range.score = scoreEle.val();
+			range.student = studentEle.val();
+			range.university = universityEle.val();
+			range.category = categoryEle.val();
+			range.level1 = level1Ele.val();
+		
+			return range;
+
+		}
+
+		function load(){
+			$('.icon-zlzw').removeClass('ui-btn-active');
+			$('.icon-1').addClass('ui-btn-active');
+
+			if( oriData )return;
+
+			getData('gkzy', 
+				function(data) {
+        		 	console.log(data);
+        		 	oriData = data;
+        		 	initView();
+        		}, 
+        		function(result) {
+        		 	console.log( result )
+        		}
+        	);	
+		}
+
+		return {
+			load: load
+		}
+	})();
+
+	// page: 职业路径
+	zlzq.pages.zylj = (function(){
+
+		var oriData;
+
+		var industries = {};
+
+		function initView(){
+
+			var rows = oriData.pesonerInfos;
+
+			var categorySele = $('#zylj_popup_category').find('select');
+			var level1Sele = $('#zylj_popup_level1').find('select');
+			var majorSele = $('#zylj_popup_major').find('select');
+	
+	
+			$.each(rows, function(i,p){
+				//先去除空格
+				p.attribute2 = $.trim(p.attribute2);
+				p.attribute3 = $.trim(p.attribute3);
+				p.zhuanYe = $.trim(p.zhuanYe);
+				p.industry = $.trim(p.industry);
+	
+				var category = getValueSafely( industries, p.attribute2);
+				var level1 = getValueSafely( category, p.attribute3);
+				var major = getValueSafely( level1, p.zhuanYe);
+				var total = getValueSafely( major, 'total', 0);
+				var count = getValueSafely( major, p.industry, 0);
+	
+				industries[p.attribute2][p.attribute3][p.zhuanYe][p.industry]
+					= count + 1;
+	
+				industries[p.attribute2][p.attribute3][p.zhuanYe]['total']
+					= total + 1;
+			});
+	
+			var opts = '<option></option>';
+	
+			$.each(industries, function(category, cv){
+				opts += '<option value="' + category + '">' + category + '</option>';
+				$.each(cv, function(level1, lv){
+					$.each(lv, function(major, mv){
+						var total = mv.total;
+						$.each(mv, function(industry, iv){
+	
+							if( industry == 'total' )return;
+	
+							mv[industry] = (iv*100/total).toFixed(2) + '%';
+	
+						})
+					})
+				})
+			})
+	
+			categorySele.empty();
+			categorySele.append( opts );
+			categorySele.selectmenu('refresh', true);
+	
+			categorySele.change(function(){
+				var currentCategory = $(this).val();
+				var level1s = industries[currentCategory];
+				var opts = '<option></option>';
+				$.each(level1s, function(level1, lv){
+					opts += '<option value="' + level1 + '">' + level1 + '</option>';
+				});
+				level1Sele.empty();
+				level1Sele.append(opts);
+				level1Sele.selectmenu('refresh', true);
+
+				majorSele.html('&nbsp;&nbsp;&nbsp;&nbsp;');
+			});
+	
+			level1Sele.change(function(){
+				var currentCategory = $(this).val();
+				var range = getRange();
+				var values = industries[range.category][range.level1];
+				var opts = '<option></option>';
+				$.each(values, function(major, mv){
+					opts += '<option value="' + major + '">' + major + '</option>';
+				});
+				majorSele.empty();
+				majorSele.append(opts);
+				majorSele.selectmenu('refresh', true);
+			});
+
+			$('#zylj_search').click(function(e){
+
+				var errMsg = false;
+				var range = getRange();
+		
+				if( !range.category ){
+					errMsg = '请选择学科门类！';
+				}
+				else if( !range.level1 ){
+					errMsg = '请选择一级学科！';
+				}
+				else if( !range.major ){
+					errMsg = '请选择专业！';
+				}
+				if( errMsg ){
+					$('#zylj_popMsg').find('span').html(errMsg);
+					$('#zylj_popMsg').popup('open');
+					$(this).removeClass('ui-btn-active'); // 此时已经带有.ui-btn-active
+					return false;
+				} else{
+			
+					var rows = industries[range.category][range.level1][range.major];
+			
+					var list = $('#zylj_list');
+					list.empty();	
+					if( rows ){
+						var lis = '';
+			
+						$.each(rows, function(h, r){
+							if( h == 'total' )return;
+			
+							lis += '<li>行业：' + h 
+							     + '<br>比例：' + r;
+			
+						});
+						list.append( lis );
+					}
+					try{
+						list.listview('refresh');
+					} catch(e){
+
+					}
+				}
+			});
+
+
+		}
+
+		function getRange(){
+			var categorySele = $('#zylj_popup_category').find('select');
+			var level1Sele = $('#zylj_popup_level1').find('select');
+			var majorSele = $('#zylj_popup_major').find('select');
+			return {
+				category : categorySele.val(),
+				level1: level1Sele.val(),
+				major: majorSele.val()
+			}
+		}
+
+		function load(){
+			$('.icon-zlzw').removeClass('ui-btn-active');
+			$('.icon-2').addClass('ui-btn-active');
+
+			if( oriData )return;
+
+			getData('zylj', 
+				function(data) {
+        		 	console.log(data);
+        		 	oriData = data;
+        		 	initView();
+        		}, 
+        		function(result) {
+        		 	console.log( result )
+        		}
+        	);	
+		}
+
+		return {
+			load: load
+		}
+	})();
+
+	// page: 职业介绍
+	zlzq.pages.zyjs = (function(){
+
+		var oriData;
+
+		var contents = {};
+
+		function initView(){
+
+			popupPage = $('#zyjs_popup');
+	
+			contents = oriData.zhiYes;
+	
+			list = $('#zyjs_list');
+	
+			var lis = '';
+			$.each(contents, function(i, zhiye){
+	
+				lis += '<li><a href="#zyjs_popup" data-transition="pop" class="jump-content" content=' + i + '><span class="desc">文章简介：' + zhiye.jianJie + '</span><br>'
+					 + '<h1 class="title">' + zhiye.tiMu + '</h1>'
+					 + '<span class="author">作者：' + zhiye.zuoZhe + '</span></a></li>';
+	
+			})
+			list.append( lis );
+			list.listview('refresh');
+	
+	
+			$('.jump-content').click(function(e){
+				var i = parseInt( $(this).attr('content') );
+				var content = contents[i];
+				console.log( content.tiMu );
+	
+				$('#zyjs_popup').find('.ui-content').html( content.neiRong );
+	
+				$('#zyjs_popup_header').find('h1').html( content.tiMu );
+				$('#zyjs_popup_header').find('h5').html( content.zuoZhe );
+	
+				$.mobile.changePage( "#zyjs_popup");
+			});
+
+		}
+
+		function getRange(){
+		}
+
+		function load(){
+
+			$('.icon-zlzw').removeClass('ui-btn-active');
+			$('.icon-3').addClass('ui-btn-active');
+
+			if( oriData )return;
+
+			getData('zyjs', 
+				function(data) {
+        		 	console.log(data);
+        		 	oriData = data;
+        		 	initView();
+        		}, 
+        		function(result) {
+        		 	console.log( result )
+        		}
+        	);	
+		}
+
+		return {
+			load: load
+		}
+	})();
+
+	// page: 我
+	zlzq.pages.me = (function(){
+
+		var oriData;
+
+		var contents = {};
+
+		function initView(){
+		}
+
+		function getRange(){
+		}
+
+		function load(){
+
+			$('.icon-zlzw').removeClass('ui-btn-active');
+			$('.icon-4').addClass('ui-btn-active');
+		}
+
+		return {
+			load: load
+		}
+	})();
+
+	$( document ).on('pagechange',function(event, ui){
+		var pid = ui.toPage.attr('id');
+		console.log( pid );
+		if( zlzq.pages[pid] ){
+			zlzq.pages[pid].load();
+		}
+		
+	});
+</script>
+
+</body>
+</html>
