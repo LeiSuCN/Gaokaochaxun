@@ -61,6 +61,37 @@
   			max-width: 100%;
 		}
 
+		#statisticsLegend{
+			font-size: 12px;
+			font-family: Microsoft YaHei,SimHei;
+		}
+
+		.legend-color{
+			font-size: 1em;
+			line-height: 1.2em;
+		}
+
+		.legend-text{
+			font-size: 1em;
+			line-height: 1.2em;
+			color: white;
+		}
+
+		#share-btn{
+			background-color: transparent;
+  			border: 0px;
+		}
+
+		.share-to{
+			font-size: 12px;
+			color: #b4b4b4!important;
+			text-decoration: none;
+		}
+
+		.share-to img{
+			height: 1em;
+		}
+
 		.ui-select div.ui-btn{
 			padding: 0px;
   			border: 0px;
@@ -100,10 +131,12 @@
 </head>
 <body>
 
-<!-- 高考专业 -->
+
+
+<!-- 高考志愿 -->
 <div data-role="page" class="bg" id="gkzy">
 	<div data-role="header" data-theme="a">
-		<h1>高考专业</h1>
+		<h1>高考志愿</h1>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
@@ -173,8 +206,8 @@
 	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
-				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2" data-icon="custom">职业路径</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-1" data-icon="custom">高考志愿</a></li>
+				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2" data-icon="custom">学生就业</a></li>
 				<li><a href="#zyjs"  data-transition="slide" class="icon-zlzw icon-3" data-icon="custom">职业介绍</a></li>
 				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
@@ -182,10 +215,10 @@
 	</div><!-- /footer -->	
 </div>
 
-<!-- 职业路径  -->
+<!-- 学生就业  -->
 <div data-role="page" class="bg" id="zylj">
 	<div data-role="header" data-theme="a">
-		<h1>职业路径</h1>
+		<h1>学生就业</h1>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
@@ -235,8 +268,8 @@
 	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
-				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
+				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考志愿</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-2"  data-icon="custom">学生就业</a></li>
 				<li><a href="#zyjs" data-transition="slide" class="icon-zlzw icon-3"  data-icon="custom">职业介绍</a></li>
 				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
@@ -261,8 +294,8 @@
 	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
-				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
+				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考志愿</a></li>
+				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">学生就业</a></li>
 				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-3"  data-icon="custom">职业介绍</a></li>
 				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
@@ -289,13 +322,26 @@
 	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考专业</a></li>
-				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">职业路径</a></li>
+				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考志愿</a></li>
+				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">学生就业</a></li>
 				<li><a href="#zyjs" data-transition="slide" class="icon-zlzw icon-3" data-icon="custom">职业介绍</a></li>
 				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-4" data-icon="custom">我</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->	
+</div>
+
+<!-- 引导页 -->
+<div data-role="page" class="bg" id="sy">
+	<div data-role="header" data-theme="a" style="display:none">
+		<h1>首页</h1>
+		<a href="#sy_popup" data-rel="popup" class="ui-btn ui-corner-all ui-icon-action ui-btn-right ui-btn-icon-notext" id="share-btn">分享到</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<a href="javascript:void(0)" class="ui-btn" id="enterBtn">进入</a>
+	</div>
+
 </div>
 
 <!-- popup#gkzy_popup -->
@@ -324,13 +370,9 @@
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
-		
-		<ul data-role="listview" data-inset="true" class="list" id="zylj_list">
-			<li>
-				
-			</li>
-		</ul>
-
+		<div id="statisticsChart" style="height:400px;"></div>
+		<div id="statisticsLegend">
+		</div>
 	</div><!-- /content -->
 </div><!-- /page popup -->
 
@@ -348,6 +390,10 @@
 	</div><!-- /content -->
 </div><!-- /page popup -->
 
+
+
+
+<script src="js/echarts-all.js"></script>
 <script type="text/javascript">
 
 	function getData(id, callbackForSucc, callbackForFail){
@@ -393,9 +439,9 @@
 	zlzq.url = {};
 	// url: root
 	zlzq.url.root = 'http://115.29.140.45:8081/zlzw-web/MAdminAction';
-	// url: 高考专业
+	// url: 高考志愿
 	zlzq.url.gkzy = zlzq.url.root + '/productSelect.action';
-	// url: 职业路径
+	// url: 学生就业
 	zlzq.url.zylj = zlzq.url.root + '/allHangYe.action';
 	// url: 职业介绍
 	zlzq.url.zyjs = zlzq.url.root + '/allJieShao.action';
@@ -404,7 +450,30 @@
 
 	zlzq.pages = {};
 
-	// page: 高考专业
+	// page: 我
+	zlzq.pages.sy = (function(){
+
+		var oriData;
+
+		var contents = {};
+
+		function initView(){
+		}
+
+		function getRange(){
+		}
+
+		function load(){
+
+			$( "#sy_popup" ).popup( "option", "align","1,0");
+		}
+
+		return {
+			load: load
+		}
+	})();
+
+	// page: 高考志愿
 	zlzq.pages.gkzy = (function(){
 
 		var oriData;
@@ -643,12 +712,20 @@
 		}
 	})();
 
-	// page: 职业路径
+	// page: 学生就业
 	zlzq.pages.zylj = (function(){
 
 		var oriData;
 
 		var industries = {};
+
+		var statisticsChart = false;
+
+		var statisticsLegend = false;
+
+		var colors = [ 'rgb(138,213,240)', 'rgb(197,226,109)', 'rgb(255,217,128)', 'rgb(255,148,148)', 'rgb(214,173,235)'];
+
+		var currentRows = false; // 当前待加载的数据
 
 		function initView(){
 
@@ -690,8 +767,10 @@
 	
 							if( industry == 'total' )return;
 	
-							mv[industry] = (iv*100/total).toFixed(2) + '%';
-	
+							mv[industry] = {
+								r: parseFloat((iv*100/total).toFixed(2)),
+								v: iv
+							}
 						})
 					})
 				})
@@ -750,30 +829,9 @@
 				} else{
 			
 					var rows = industries[range.category][range.level1][range.major];
-			
-					var list = $('#zylj_list');
-					list.empty();	
-					if( rows ){
-						var lis = '';
-			
-						$.each(rows, function(h, r){
-							if( h == 'total' )return;
-			
-							lis += '<li>行业：' + h 
-							     + '<br>比例：' + r;
-			
-						});
-						list.append( lis );
-					}
-					try{
-						list.listview('refresh');
-					} catch(e){
-
-					}
+					currentRows = rows;
 				}
 			});
-
-
 		}
 
 		function getRange(){
@@ -785,6 +843,110 @@
 				level1: level1Sele.val(),
 				major: majorSele.val()
 			}
+		}
+
+		function createChart(){
+
+			if( statisticsChart ){
+				statisticsChart.clear();
+			} else{
+				// 将div设置为正方形
+				var chartContainer = $('#statisticsChart');
+				chartContainer.height( chartContainer.width() );
+            	var option = {
+            	    title: {
+            	        show: false // 不显示标题
+            	    },
+            	    legend: {
+            	        show: false, // 不显示图例
+            	        data: []
+            	    },
+            	    color: colors
+            	}
+	
+				statisticsChart = echarts.init( document.getElementById('statisticsChart'));
+	
+				statisticsChart.setOption( option );
+
+				// 
+				statisticsLegend = $('#statisticsLegend');
+
+				
+			}
+			
+			setChartSeries(currentRows);
+		}
+
+		function setChartSeries(rows){
+			var data = [];
+			var other = 0;
+			var otherr = 100;
+			var colorIdx = 0;
+			var legendHtml = '';
+
+			$.each(rows, function(h, r){
+				if( h == 'total' )return;
+				// 小于3%都归到其他里
+				if( r.r <= 3 ){
+					other += r.v;
+				} else{
+					otherr -= r.r;
+					var legend = h + ' - ' + r.r + '%';
+					data.push({
+						name: legend,
+						value: r.v
+					});
+
+					legendHtml = pushLegendHtml(colorIdx++, legend, legendHtml);
+				}
+			});
+
+			if( other > 0 ){
+				var legend = '其他'+ ' - ' + otherr.toFixed(2) + '%';
+				data.push({
+					name: legend,
+					value: other
+				});
+
+				legendHtml = pushLegendHtml(colorIdx++, legend, legendHtml);
+			}
+
+			//---- chart
+			statisticsChart.setOption({
+				color: colors
+			})
+            statisticsChart.setSeries([{
+                name: '学生就业',
+                type: 'pie',
+                radius : '90%',
+                center: ['50%', '50%'],
+                itemStyle :　{
+                    normal : {
+                        label : {
+                        	show: false
+                        },
+                        labelLine : {
+                            show : false
+                        }
+                    }
+                },
+                data:data                  
+            }]);
+
+            //---- legend
+
+            statisticsLegend.empty();	
+            statisticsLegend.html(legendHtml);		
+		}
+
+		function pushLegendHtml(colorIdx, legend, html){
+
+			var colorRange = colors.length;
+			var color = colors[colorIdx % colorRange];
+
+			html += '<div style="color:' + color + '"><span class="legend-color"> ■ </span><span class="legend-text">' + legend + '</span></div>';
+
+			return html;
 		}
 
 		function load(){
@@ -806,7 +968,8 @@
 		}
 
 		return {
-			load: load
+			load: load,
+			createChart: createChart
 		}
 	})();
 
@@ -903,14 +1066,48 @@
 		}
 	})();
 
+	// 判断是否为第一次
+	// 如果为第一次需要跳转到引导页
+	function isFirstLogin(){
+		return !!!window.localStorage.getItem("VERSION");
+	}
+
+	//---- 事件绑定 ----//
 	$( document ).on('pagechange',function(event, ui){
 		var pid = ui.toPage.attr('id');
-		console.log( pid );
+		console.log( 'pagechange -> ' + pid );
 		if( zlzq.pages[pid] ){
 			zlzq.pages[pid].load();
+		} 
+		// 创建统计图
+		else if(  pid == 'zylj_popup' ){
+			zlzq.pages['zylj'].createChart();
 		}
-		
 	});
+
+	$( document ).on('pageinit', function(event, ui){
+		var pid = event.target.id ;
+		console.log( 'pageinit -> ' + pid )
+		// 如果第一次登陆，跳转到引导页
+		if( isFirstLogin() && pid != 'sy'){
+			console.log( 'isFirstLogin' );
+			$( ":mobile-pagecontainer" ).pagecontainer('change', '#sy');
+		} 
+
+	})
+
+	// 分享
+	$( document ).on('tap', '.share-to', function(){
+		console.log( 'share to wx' );
+	});
+
+	// 首页进入
+	$('#enterBtn').on('tap', function(){
+		console.log( 'enter to main' );
+		$( ":mobile-pagecontainer" ).pagecontainer('change', '#gkzy');
+	});
+
+
 </script>
 
 </body>
