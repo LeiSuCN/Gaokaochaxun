@@ -1068,9 +1068,15 @@
 
 	// 判断是否为第一次
 	// 如果为第一次需要跳转到引导页
+    var temp = true;
 	function isFirstLogin(){
-		return !!!window.localStorage.getItem("VERSION");
+        return temp;
+        //return !!!window.localStorage.getItem("VERSION");
 	}
+
+    function hasLogin(){
+        temp = false;
+    }
 
 	//---- 事件绑定 ----//
 	$( document ).on('pagechange',function(event, ui){
@@ -1104,6 +1110,7 @@
 	// 首页进入
 	$('#enterBtn').on('tap', function(){
 		console.log( 'enter to main' );
+	hasLogin();
 		$( ":mobile-pagecontainer" ).pagecontainer('change', '#gkzy');
 	});
 
