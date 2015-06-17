@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>职来志趣</title>
 	<link rel="stylesheet" href="style/jquery.mobile-1.4.5.css">
+	<link rel="stylesheet" type="text/css" href="style/jquery.fullPage.css" />
 	<link rel="stylesheet" href="style/theme_zlzw.css">
 	<style type="text/css">
 
@@ -92,6 +93,24 @@
 			height: 1em;
 		}
 
+		#fullpage .content{
+			height: 100%;
+			position: relative;
+		}
+
+		#fullpage img{
+			height: 100%;
+			width: 100%;
+		}
+
+		#enterBtn {
+			background: rgba(255,255,255,0.7);
+  			border: 1px solid white;
+  			border-radius: .5em;
+  			padding: .5em 2em;
+  			color: white;
+		}
+
 		.ui-select div.ui-btn{
 			padding: 0px;
   			border: 0px;
@@ -126,8 +145,6 @@
   			white-space: normal!important;
 		}
 	</style>
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery.mobile-1.4.5.js"></script>
 </head>
 <body>
 
@@ -338,8 +355,22 @@
 		<a href="#sy_popup" data-rel="popup" class="ui-btn ui-corner-all ui-icon-action ui-btn-right ui-btn-icon-notext" id="share-btn">分享到</a>
 	</div><!-- /header -->
 
-	<div role="main" class="ui-content">
-		<a href="javascript:void(0)" class="ui-btn" id="enterBtn">进入</a>
+	<div role="main" class="ui-content" style="padding:0px;">
+		<div id="fullpage">
+		    <div class="section " id="section0">
+		        <div class="content">
+		            <img src="style/images/guide1.png">
+		        </div>
+		    </div>
+		    <div class="section" id="section1">
+		        <div class="content">
+		            <img src="style/images/guide2.png">
+		            <div style="position:absolute; bottom: 4em;	text-align: center; width: 100%">
+		            	<button data-role="none" id="enterBtn">立即进入</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
 	</div>
 
 </div>
@@ -390,9 +421,9 @@
 	</div><!-- /content -->
 </div><!-- /page popup -->
 
-
-
-
+<script src="js/jquery.js"></script>
+<script src="js/jquery.mobile-1.4.5.js"></script>
+<script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
 <script src="js/echarts-all.js"></script>
 <script type="text/javascript">
 
@@ -1097,6 +1128,14 @@
 		// 如果第一次登陆，跳转到引导页
 		if( isFirstLogin() && pid != 'sy'){
 			console.log( 'isFirstLogin' );
+			//
+
+			$('#fullpage').fullpage({
+                //sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
+                navigation: true,
+                navigationPosition: 'right'
+            });
+			//
 			$( ":mobile-pagecontainer" ).pagecontainer('change', '#sy');
 		} 
 
@@ -1110,7 +1149,7 @@
 	// 首页进入
 	$('#enterBtn').on('tap', function(){
 		console.log( 'enter to main' );
-	hasLogin();
+		hasLogin();
 		$( ":mobile-pagecontainer" ).pagecontainer('change', '#gkzy');
 	});
 
