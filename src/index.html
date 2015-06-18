@@ -92,6 +92,10 @@
 		.share-to img{
 			height: 1em;
 		}
+    
+        .share {
+              padding: 0px .5em;
+        }
 
 		#fullpage .content{
 			height: 100%;
@@ -102,15 +106,37 @@
 			height: 100%;
 			width: 100%;
 		}
+    
+        #fp-nav ul li a span{background:white}
 
 		#enterBtn {
-			background: rgba(255,255,255,0.7);
-  			border: 1px solid white;
+			background: #4BAD37;
+  			border: 0px solid white;
   			border-radius: .5em;
   			padding: .5em 2em;
   			color: white;
 		}
 
+        .ui-icon-wx.ui-icon-carat-r{
+            background-color: transparent!important;
+            border: 0px!important;
+            float: right!important;
+            margin-right: 10px!important;
+        }
+    
+        .ui-icon-wx.ui-icon-carat-r:after{
+            background-image: url(style/images/share.png)!important;
+            background-size: 1.5em 1.5em!important;
+        }
+    
+        iframe{
+            border:0px;
+            width:100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+    
 		.ui-select div.ui-btn{
 			padding: 0px;
   			border: 0px;
@@ -144,6 +170,11 @@
   			word-break: break-word;
   			white-space: normal!important;
 		}
+    
+        .ui-header{
+            padding-top:.5em;
+        }
+
 	</style>
 </head>
 <body>
@@ -164,7 +195,7 @@
 						<span class="h100w1"></span><lable>分数</lable>
 					</div>
 					<div class="option-value">
-						<input data-role="none" id="gkzy_score">
+						<input data-role="none" type="number" min="0" max="750" id="gkzy_score">
 					</div>
 				</div>
 				<div class="vertical-bar"></div>
@@ -328,11 +359,9 @@
 
 	<div role="main" class="ui-content">
 		<ul data-role="listview" data-inset="true" id="me_list" >
-			<li><a href="#" data-transition="pop">会员登录</a></li>
-			<li><a href="#" data-transition="pop">关于我们</a></li>
-			<li><a href="#" data-transition="pop">意见反馈</a></li>
-			<li><a href="#" data-transition="pop">联系我们</a></li>
-			<li><a href="#" data-transition="pop">版权说明</a></li>
+			<li><a href="#me_popup" id="meAbout" class＝"me-popup" data-transition="pop">关于我们</a></li>
+			<li><a href="#me_popup" id="meContact" class＝"me-popup" data-transition="pop">联系我们</a></li>
+			<li><a href="#me_popup" id="meCopyright" class＝"me-popup" data-transition="pop">版权说明</a></li>
 		</ul>
 	</div>
 
@@ -350,10 +379,6 @@
 
 <!-- 引导页 -->
 <div data-role="page" class="bg" id="sy">
-	<div data-role="header" data-theme="a" style="display:none">
-		<h1>首页</h1>
-		<a href="#sy_popup" data-rel="popup" class="ui-btn ui-corner-all ui-icon-action ui-btn-right ui-btn-icon-notext" id="share-btn">分享到</a>
-	</div><!-- /header -->
 
 	<div role="main" class="ui-content" style="padding:0px;">
 		<div id="fullpage">
@@ -379,8 +404,17 @@
 <div data-role="page" id="gkzy_popup" class="bg">
 
 	<div data-role="header" data-theme="a"  data-position="fixed">
-		<h1 style="margin-left: 10px; text-align: left;"><a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">返回</a></h1>
+		<h1 style="margin: 0px; text-align: left; width:100%;">
+            <a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">返回</a>
+            <a href="#gkzy_share" class="ui-btn ui-icon-wx ui-icon-carat-r ui-btn-icon-notext ui-corner-all" data-rel="popup">分享</a>
+        </h1>
 	</div><!-- /header -->
+    
+    
+    <div data-role="popup" id="gkzy_share" class="share ui-content">
+        <input type="button" data-icon="action" class="share-to-pengyouquan" value="分享到朋友圈">
+    </div>
+    
 
 	<div role="main" class="ui-content">
 		
@@ -397,9 +431,17 @@
 <div data-role="page" id="zylj_popup" class="bg">
 
 	<div data-role="header" data-theme="a"  data-position="fixed">
-		<h1 style="margin-left: 10px; text-align: left;"><a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">返回</a></h1>
-	</div><!-- /header -->
-
+		<h1 style="margin: 0px; text-align: left; width:100%;">
+            <a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">返回</a>
+            <a href="#zylj_share" class="ui-btn ui-icon-wx ui-icon-carat-r ui-btn-icon-notext ui-corner-all" data-rel="popup">分享</a>
+        </h1>
+    </div><!-- /header -->
+    
+    
+    <div data-role="popup" id="zylj_share" class="share ui-content">
+        <input type="button" data-icon="action" class="share-to-pengyouquan" value="分享到朋友圈">
+    </div>
+    
 	<div role="main" class="ui-content">
 		<div id="statisticsChart" style="height:400px;"></div>
 		<div id="statisticsLegend">
@@ -421,11 +463,41 @@
 	</div><!-- /content -->
 </div><!-- /page popup -->
 
+<!-- popup#me_popup -->
+<div data-role="page" id="me_popup" class="bg" style="background: white!important;">
+    
+    <div data-role="header" data-theme="a"  data-position="fixed" id="zyjs_popup_header">
+        <a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" style="top:1.5em;"></a>
+        <h1></h1>
+        <h5></h5>
+    </div><!-- /header -->
+    
+    <div role="main" class="ui-content" style="background: white;">
+        <iframe src="" seamless="" id="me_popup_iframe"></iframe>
+    </div><!-- /content -->
+</div><!-- /page popup -->
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/jquery.mobile-1.4.5.js"></script>
 <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
 <script src="js/echarts-all.js"></script>
 <script type="text/javascript">
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    var hasInstalledWx = false;
+    function onDeviceReady() {
+        
+        Wechat.isInstalled(
+            function (installed) {
+                    hasInstalledWx = !!installed;
+                },
+                function (reason) {
+                    hasInstalledWx = false;
+                }
+        );
+
+    }
 
 	function getData(id, callbackForSucc, callbackForFail){
 
@@ -754,7 +826,7 @@
 
 		var statisticsLegend = false;
 
-		var colors = [ 'rgb(138,213,240)', 'rgb(197,226,109)', 'rgb(255,217,128)', 'rgb(255,148,148)', 'rgb(214,173,235)'];
+		var colors = [ 'rgb(138,213,240)', 'rgb(197,226,109)', 'rgb(255,217,128)', 'rgb(255,148,148)', 'rgb(214,173,235)', 'rgb(29,169,218)', 'rgb(179,104,207)', 'rgb(131,182,0)', 'rgb(255,167,15)', 'rgb(233,39,39)'];
 
 		var currentRows = false; // 当前待加载的数据
 
@@ -1056,14 +1128,24 @@
 
 			if( oriData )return;
 
+            // 数据量较大，需要等待按钮
+            $.mobile.loading( "show", {
+                text: '正在获取数据，请稍候...',
+                textVisible: 'true',
+                textonly: false,
+                html: ''
+            });
+                       
 			getData('zyjs', 
 				function(data) {
         		 	console.log(data);
         		 	oriData = data;
         		 	initView();
+                    $.mobile.loading( "hide" );
         		}, 
         		function(result) {
         		 	console.log( result )
+                    $.mobile.loading( "hide" );
         		}
         	);	
 		}
@@ -1081,6 +1163,11 @@
 		var contents = {};
 
 		function initView(){
+                     
+            $('#me_list > li > a').click(function(e){
+               var id = $(this).attr('id');
+               $('#me_popup_iframe').attr('src', 'http://120.25.148.21:8080/zxb/me.html?type=' + id);
+            })
 		}
 
 		function getRange(){
@@ -1090,6 +1177,11 @@
 
 			$('.icon-zlzw').removeClass('ui-btn-active');
 			$('.icon-4').addClass('ui-btn-active');
+                     
+            if( oriData )return;
+            initView();
+            oriData=true;
+                
 		}
 
 		return {
@@ -1101,12 +1193,13 @@
 	// 如果为第一次需要跳转到引导页
     var temp = true;
 	function isFirstLogin(){
-        return temp;
-        //return !!!window.localStorage.getItem("VERSION");
+        //return temp;
+        return !!!window.localStorage.getItem("VERSION");
 	}
 
     function hasLogin(){
-        temp = false;
+        //temp = false;
+        window.localStorage.setItem("VERSION",true);
     }
 
 	//---- 事件绑定 ----//
@@ -1114,6 +1207,11 @@
 		var pid = ui.toPage.attr('id');
 		console.log( 'pagechange -> ' + pid );
 		if( zlzq.pages[pid] ){
+            // 如果是“我”页面，调整弹出页面为60%
+            if( pid == 'me' ){
+                $('.ui-ext-url').height( $(document).height() * 0.6 );
+                     
+            }
 			zlzq.pages[pid].load();
 		} 
 		// 创建统计图
@@ -1128,13 +1226,12 @@
 		// 如果第一次登陆，跳转到引导页
 		if( isFirstLogin() && pid != 'sy'){
 			console.log( 'isFirstLogin' );
-			//
-
+                     
 			$('#fullpage').fullpage({
-                //sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
                 navigation: true,
                 navigationPosition: 'right'
             });
+            
 			//
 			$( ":mobile-pagecontainer" ).pagecontainer('change', '#sy');
 		} 
@@ -1142,14 +1239,43 @@
 	})
 
 	// 分享
-	$( document ).on('tap', '.share-to', function(){
+	$( document ).on('tap', '.ui-icon-wx', function(){
 		console.log( 'share to wx' );
+        $( ".share" ).popup( "option", "align","1,0");
 	});
-
+    
+    //
+    $( document ).on('tap', '.share-to-pengyouquan', function(){
+        console.log('peng you quan');
+        Wechat.share({
+          message: {
+             title: "职学帮",
+             description: "选志愿 看前景 一站式搞定",
+             messageExt: "选志愿 看前景 一站式搞定",
+             thumb: "http://120.25.148.21:8080/zxb/images/xue.png",
+                     media: {
+                     type: Wechat.Type.LINK,
+                     webpageUrl: "http://120.25.148.21:8080/zxb/download.html"
+                     }
+          },
+           scene: Wechat.Scene.TIMELINE   // share to Timeline
+          }, function () {
+                 //alert("Success");
+            }, function (reason) {
+                 //alert("Failed: " + reason);
+        });
+    });
+    
+    // 我页
+    $( document ).on('click', '.me-popup', function(){
+        
+    });
+                     
 	// 首页进入
 	$('#enterBtn').on('tap', function(){
 		console.log( 'enter to main' );
 		hasLogin();
+        $('#fp-nav').remove();
 		$( ":mobile-pagecontainer" ).pagecontainer('change', '#gkzy');
 	});
 
