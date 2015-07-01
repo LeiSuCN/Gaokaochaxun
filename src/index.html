@@ -157,7 +157,7 @@
   			box-shadow: none;
   			font-size: 12px;
   			font-weight: normal;
-  			color: white;
+ 			color: white;
   			text-shadow: none;
 		}
 
@@ -521,26 +521,43 @@
 
     }
 
+    function showLoading(){
+
+            $.mobile.loading( "show", {
+                text: '正在获取数据，请稍候...',
+                textVisible: 'true',
+                textonly: false,
+                html: ''
+            });
+    }
+
+    function hideLoading(){
+	$.mobile.loading('hide');
+    }
+
 	function getData(id, callbackForSucc, callbackForFail){
 
 		var url = zlzq.url[id];
 
 		if( !url ){
-			error('非法的数据请求ID[' + id + ']');
-			return;
+		  url = id;
 		}
+
+		showLoading();
 
 		$.ajax({
 			url: url,
-            type: "POST",
+            type: "GET",
             dataType: "json",
             cache:true,
             crossDomain : true,
             success : function(data) {
+		hideLoading();
             	callbackForSucc( data );
             },
             
             error : function(result) {
+		hideLoading();
             	callbackForFail( result );
             }
 		})		
@@ -566,6 +583,24 @@
   
     }
 
+function refreshSelect(id, items){
+    var $sel = $('#' + id).find('select');
+    var opts = '';
+    if( items && items.length > 0 ){
+	$.each(items, function(i, item){
+	    opts += '<option value="' + item + '">' + item + '</option>';
+        });
+
+    } else{
+	opts = '<option></option>';
+    }
+    $sel.empty();
+    $sel.append( opts);
+    try{
+	$sel.selectmenu('refresh', true);
+    } catch(e){ }			
+}
+
 function adjustMePageHeight(){
     var screen = $.mobile.getScreenHeight();
     
@@ -587,13 +622,14 @@ function adjustMePageHeight(){
 	// url
 	zlzq.url = {};
 	// url: root
-	zlzq.url.root = 'http://115.29.140.45:8081/zlzw-web/MAdminAction';
+	zlzq.url.root = 'http://115.29.140.45:8081/zlzw-web';
+	//zlzq.url.root = 'http://192.168.1.100:8080/zlzw-web';
 	// url: 高考导航
-	zlzq.url.gkzy = zlzq.url.root + '/productSelect.action';
+	zlzq.url.gkzy = zlzq.url.root + '/app/gkdh.action';
 	// url: 就业指导
-	zlzq.url.zylj = zlzq.url.root + '/allHangYe.action';
+	zlzq.url.zylj = zlzq.url.root + '/app/jyzd.action';
 	// url: 就业指导
-	zlzq.url.zyjs = zlzq.url.root + '/allJieShao.action';
+	zlzq.url.zyjs = zlzq.url.root + '/app/data/zyjs.action';
 
 
 
@@ -629,130 +665,52 @@ function adjustMePageHeight(){
 	// page: 高考导航
 	zlzq.pages.gkzy = (function(){
 
-		var oriData;
-		// 学校省
-		var uProvinces = {};
+		var oriData = false;
 
-		// 考生所在省 -> 学校省 -> 学科门类 -> 一级学科 -> 学校名称 -> 专业
-		var universities = {};
-
-		// 学科门类 -> 一级学科
-		var categories = {};
-
-		// 当前年份
-		var filterYear = (new Date()).getFullYear() - 5;
-
-		function initView(){
-			var data = oriData.integralInfos;
-	
-			var len = data.length;
-	
-			for( var i = 0 ; i < len ; i++ ){
-				var item = data[i];
-
-				// 记录年
-				var year = parseInt( item['year'] );
-				if( year < filterYear )continue;
-	
-				// 考生所在省
-				var sProvince = item['kaoShengLocality']; 
-				// 学校所在省
-				var uProvince = item['shengFen'];
-				// 学科门类
-				var category = item['xueKeType'];
-				// 一级学科
-				var level1 = item['oneXueKe'];
-				// 学校名称
-				var school = item['schoolName'];
-				// 专业
-				var major = item['zhuanYeName'];
-				// 平均分
-				var score = parseInt(item['averageIntegral'])
-	
-				var items = universities;
-	
-				items =  getValueSafely(items, sProvince);
-				items =  getValueSafely(items, uProvince);
-				items =  getValueSafely(items, category);
-				items =  getValueSafely(items, level1);
-				items =  getValueSafely(items, school);
-				items =  getValueSafely(items, major, []);
-	
-				items.push(score);
-	
-				// 学科
-				getValueSafely( getValueSafely(categories, category), level1 );
-	
-				// 学校省
-				getValueSafely( uProvinces, uProvince);
-			}
-			
-			$.each( universities, function(spn/* 考试省名称 */, spv){
-				$.each( spv, function(upn/* 学校省名称 */, upv){
-					$.each( upv, function(cn/* 学科门类 */, cv){
-						$.each( cv, function(ln/* 一级学科 */, lv){
-							$.each( lv, function(sn/* 学校名称 */, sv){
-								$.each( sv, function(mn/* 专业名称 */, mv){
-									var total = 0;
-									for( var i = 0 ; i < mv.length ; i++ ){
-										total += mv[i];
-									}
-									sv[mn] = parseInt( total / mv.length );
-								})
-							})
-						})
-					})
-				})
-			});
-
-			var scoreEle = $('#gkzy_score');
+		function initView(data){
+			oriData = {};
+			var kaoshengShengs = data.k;
+			var xuexiaoShengs = data.x;
+			var xuekes = data.xueke;
 	
 			// 初始化考生省
-			var studentOpts = '<option></option>';
-			for( var sProvince in universities ){
-				studentOpts += '<option value="' + sProvince + '">' + sProvince + '</option>';
-			}
-			var seleS = $('#gkzy_popup_student').find('select');
-			seleS.empty();
-			seleS.append( studentOpts);
-			seleS.selectmenu('refresh', true);
+			refreshSelect('gkzy_popup_student', kaoshengShengs);
 	
 			// 初始化学校省
-			var universityOpts = '<option></option>';
-			for( var uProvince in uProvinces ){
-				universityOpts += '<option value="' + uProvince + '">' + uProvince +	 '</option>';
-			}
-			var seleU = $('#gkzy_popup_university').find('select');
-			seleU.empty();
-			seleU.append( universityOpts);
-			seleU.selectmenu('refresh', true);
+			refreshSelect('gkzy_popup_university', xuexiaoShengs);
 	
 			// 初始化学科门类
-			var options = '<option></option>';
-			for( var category in categories ){
-				options += '<option value="' + category + '">' + category + '</	option>';
-			}
-			var seleC = $('#gkzy_popup_category').find('select');
-			seleC.empty();
-			seleC.append(options);
-			seleC.selectmenu('refresh', true);
-			
-			var seleL = $('#gkzy_popup_level1').find('select');
-	
+			var firstXueke = false;
+			var currentXueke = false;
+			var xueKeTypes = [];
+			$.each(xuekes, function(i, xueke){
+				if( !firstXueke ){
+					firstXueke = xueke.xueKeType;
+				}
+
+				if( currentXueke != xueke.xueKeType ){
+					currentXueke = xueke.xueKeType;
+					oriData[currentXueke] = [];
+					xueKeTypes.push( currentXueke );
+				}
+
+				oriData[currentXueke].push( xueke.oneXueKe );
+
+			});
+			refreshSelect('gkzy_popup_category', xueKeTypes);
+
+			// 初始化一级学科
+			refreshSelect('gkzy_popup_level1', getValueSafely(oriData, firstXueke,[] ) );
+
+			var seleC = $('#gkzy_popup_category').find('select');	
 			seleC.change(function(){
 	
 				var category = $(this).val();
 	
 				// 初始化一级学科下拉选择框
-				var options = '<option></option>';
-				for( var level1 in categories[category] ){
-					options += '<option value="' + level1 + '">' + level1 + '</	option>';
-				}
-				seleL.empty();
-				seleL.append(options);
-				seleL.selectmenu('refresh', true);
-			});
+				refreshSelect('gkzy_popup_level1', getValueSafely(oriData, category, [] ) );
 
+			});
 			$('#gkzy_search').click(function(e){
 		
 				var errMsg = false;
@@ -782,41 +740,36 @@ function adjustMePageHeight(){
 					$(this).removeClass('ui-btn-active'); // 此时已经带有.ui-btn-active
 					return false;
 				} else{
-					var score = parseInt( range.score );
-			
-					var rows = universities[range.student];
-			
-					if( rows ){
-						rows = rows[range.university];
+					var url = zlzq.url.root + '/app/data/gkdh.action?';
+					url += 'score=' + range.score + '&';
+					url += 'src=' + range.student + '&';
+					url += 'dest=' + range.university + '&';
+					url += 'type=' + range.category + '&';
+					url += 'level1=' + range.level1 + '&';
+
+					getData(url, function(data){
+
+						var list = $('#gkzy_list');
+						list.empty();	
+						var rows = data.result;
 						if( rows ){
-							rows = rows[range.category];
-							if( rows ){
-								rows = rows[range.level1];
-							}
+							var lis = '';
+							$.each(rows, function(i, item){
+								lis += '<li>学&nbsp;校：' + item.schoolName 
+									     + '<br>平均分：' + item.score 
+										 + '<br>专&nbsp;业：' + item.oneXueKe + ' 	- ' + item.zhuanYe 
+										 + '</li>';
+	
+							});
+							list.append( lis );
 						}
-					}
-			
-					var list = $('#gkzy_list');
-					list.empty();	
-					if( rows ){
-						var lis = '';
-						$.each(rows, function(un/* 学校名称 */, uv){
-							$.each( uv, function(mn/* 专业名称 */, mv){
-								if( score >= mv )
-								lis += '<li>学&nbsp;校：' + un 
-								     + '<br>平均分：' + mv 
-									 + '<br>专&nbsp;业：' + range.level1 + ' - ' + mn 
-									 + '</li>';
-							})
+						try{
+							list.listview('refresh');
+						} catch(e){
+	
+						}
+					});
 
-						});
-						list.append( lis );
-					}
-					try{
-						list.listview('refresh');
-					} catch(e){
-
-					}
 				}
 			});
 
@@ -847,12 +800,9 @@ function adjustMePageHeight(){
 			$('.icon-1').addClass('ui-btn-active');
 
 			if( oriData )return;
-
 			getData('gkzy', 
 				function(data) {
-        		 	console.log(data);
-        		 	oriData = data;
-        		 	initView();
+        		 	initView(data);
         		}, 
         		function(result) {
         		 	console.log( result )
@@ -880,84 +830,59 @@ function adjustMePageHeight(){
 
 		var currentRows = false; // 当前待加载的数据
 
-		function initView(){
+		function initView(data){
 
-			var rows = oriData.pesonerInfos;
+			var rows = data.xueke;
 
 			var categorySele = $('#zylj_popup_category').find('select');
 			var level1Sele = $('#zylj_popup_level1').find('select');
 			var majorSele = $('#zylj_popup_major').find('select');
 	
-	
-			$.each(rows, function(i,p){
-				//先去除空格
-				p.attribute2 = $.trim(p.attribute2);
-				p.attribute3 = $.trim(p.attribute3);
-				p.zhuanYe = $.trim(p.zhuanYe);
-				p.industry = $.trim(p.industry);
-	
-				var category = getValueSafely( industries, p.attribute2);
-				var level1 = getValueSafely( category, p.attribute3);
-				var major = getValueSafely( level1, p.zhuanYe);
-				var total = getValueSafely( major, 'total', 0);
-				var count = getValueSafely( major, p.industry, 0);
-	
-				industries[p.attribute2][p.attribute3][p.zhuanYe][p.industry]
-					= count + 1;
-	
-				industries[p.attribute2][p.attribute3][p.zhuanYe]['total']
-					= total + 1;
+			oriData = {};
+			oriData.dict1 = {};
+			oriData.dict2 = {};
+			var curType = false;
+			var curOne = false;
+			var types = [];
+			$.each(rows, function(i,z){
+				var type = z.xueKeType;
+				var one = z.oneXueKe;
+				var zhuanYe = z.zhuanYe;
+
+				if( type != curType ){
+					curType = type;
+					oriData.dict1[curType] = [];
+					types.push( curType );
+					curOne = false;
+				}
+
+				if( one != curOne ){
+					curOne = one;
+					oriData.dict2[curType + "-" + curOne] = [];
+					oriData.dict1[curType].push( curOne );
+				}
+
+				oriData.dict2[curType + "-" + curOne].push( zhuanYe );
 			});
-	
-			var opts = '<option></option>';
-	
-			$.each(industries, function(category, cv){
-				opts += '<option value="' + category + '">' + category + '</option>';
-				$.each(cv, function(level1, lv){
-					$.each(lv, function(major, mv){
-						var total = mv.total;
-						$.each(mv, function(industry, iv){
-	
-							if( industry == 'total' )return;
-	
-							mv[industry] = {
-								r: parseFloat((iv*100/total).toFixed(2)),
-								v: iv
-							}
-						})
-					})
-				})
-			})
-	
-			categorySele.empty();
-			categorySele.append( opts );
-			categorySele.selectmenu('refresh', true);
+
+			curType = types[0];
+			curOne = oriData.dict1[curType][0];
+			refreshSelect('zylj_popup_category', types);
+			refreshSelect('zylj_popup_level1', oriData.dict1[curType]);
+			refreshSelect('zylj_popup_major', oriData.dict2[curType + "-" + curOne]);
 	
 			categorySele.change(function(){
 				var currentCategory = $(this).val();
-				var level1s = industries[currentCategory];
-				var opts = '<option></option>';
-				$.each(level1s, function(level1, lv){
-					opts += '<option value="' + level1 + '">' + level1 + '</option>';
-				});
-				level1Sele.empty();
-				level1Sele.append(opts);
-				level1Sele.selectmenu('refresh', true);
-
-				majorSele.html('&nbsp;&nbsp;&nbsp;&nbsp;');
+				var level1s = oriData.dict1[currentCategory];
+				refreshSelect('zylj_popup_level1', level1s);
+				var majors = getValueSafely(oriData.dict2, currentCategory + "-" + level1s[0], [])
+				refreshSelect('zylj_popup_major', majors);
 			});
 	
 			level1Sele.change(function(){
-				var currentCategory = $(this).val();
 				var range = getRange();
-				var values = industries[range.category][range.level1];
-				var opts = '<option></option>';
-				$.each(values, function(major, mv){
-					opts += '<option value="' + major + '">' + major + '</option>';
-				});
-				majorSele.empty();
-				majorSele.append(opts);
-				majorSele.selectmenu('refresh', true);
+                                var majors = getValueSafely(oriData.dict2, range.category + "-" + range.level1, [])
+                                refreshSelect('zylj_popup_major', majors);
 			});
 
 			$('#zylj_search').click(function(e){
@@ -1027,7 +952,27 @@ function adjustMePageHeight(){
 				
 			}
 			
-			setChartSeries(currentRows);
+			//setChartSeries(currentRows);
+			var range = getRange();
+			var url = zlzq.url.root + '/app/data/jyzd.action?';
+			url += 'type=' + range.category + '&';
+			url += 'level1=' + range.level1 + '&';
+			url += 'zhuanye=' + range.major + '&';
+			getData(url, function(data){
+				var currentRows = {};
+				var rows = data.result;
+				var total = 0;
+				$.each(rows , function(i, row){
+					total += row.count;
+					currentRows[row.name] = {};
+					currentRows[row.name].v = row.count;
+				});
+				$.each(currentRows, function(i, row){
+					row.r = parseFloat( (row.v*100/total).toFixed(2));
+				});
+				currentRows.total = total;
+				setChartSeries(currentRows);
+			});
 		}
 
 		function setChartSeries(rows){
@@ -1110,9 +1055,7 @@ function adjustMePageHeight(){
 
 			getData('zylj', 
 				function(data) {
-        		 	console.log(data);
-        		 	oriData = data;
-        		 	initView();
+        		 	initView(data);
         		}, 
         		function(result) {
         		 	console.log( result )
@@ -1131,22 +1074,20 @@ function adjustMePageHeight(){
 
 		var oriData;
 
-		var contents = {};
+		function initView(data){
 
-		function initView(){
-
+			var contents = data.result;
 			popupPage = $('#zyjs_popup');
 	
-			contents = oriData.zhiYes;
 	
 			list = $('#zyjs_list');
 	
 			var lis = '';
 			$.each(contents, function(i, zhiye){
 	
-				lis += '<li><a href="#zyjs_popup" data-transition="pop" class="jump-content" content=' + i + '><span class="desc">文章简介：' + zhiye.jianJie + '</span><br>'
-					 + '<h1 class="title">' + zhiye.tiMu + '</h1>'
-					 + '<span class="author">作者：' + zhiye.zuoZhe + '</span></a></li>';
+				lis += '<li><a href="#zyjs_popup" data-transition="pop" class="jump-content" content=' + zhiye.id + '><span class="desc">文章简介：' + zhiye.introduction + '</span><br>'
+					 + '<h1 class="title">' + zhiye.title + '</h1>'
+					 + '<span class="author">作者：' + zhiye.author + '</span></a></li>';
 	
 			})
 			list.append( lis );
@@ -1154,16 +1095,17 @@ function adjustMePageHeight(){
 	
 	
 			$('.jump-content').click(function(e){
-				var i = parseInt( $(this).attr('content') );
-				var content = contents[i];
-				console.log( content.tiMu );
-	
-				$('#zyjs_popup').find('.ui-content').html( content.neiRong );
-	
-				$('#zyjs_popup_header').find('h1').html( content.tiMu );
-				$('#zyjs_popup_header').find('h5').html( content.zuoZhe );
-	
-				$.mobile.changePage( "#zyjs_popup");
+				var id =  $(this).attr('content') ;
+				var title = $(this).find('.title').html();
+				var author = $(this).find('.author').html();
+				var url = zlzq.url.root + '/app/data/zyjsArticle.action?id=' + id;
+				getData(url, function(data){
+					var content = data.result;
+					$('#zyjs_popup').find('.ui-content').html( content );
+					$('#zyjs_popup_header').find('h1').html( title );
+					$('#zyjs_popup_header').find('h5').html( author );
+					$.mobile.changePage( "#zyjs_popup");
+				});
 			});
 
 		}
@@ -1177,25 +1119,14 @@ function adjustMePageHeight(){
 			$('.icon-3').addClass('ui-btn-active');
 
 			if( oriData )return;
-
-            // 数据量较大，需要等待按钮
-            $.mobile.loading( "show", {
-                text: '正在获取数据，请稍候...',
-                textVisible: 'true',
-                textonly: false,
-                html: ''
-            });
                        
 			getData('zyjs', 
 				function(data) {
-        		 	console.log(data);
-        		 	oriData = data;
-        		 	initView();
-                    $.mobile.loading( "hide" );
+        		 	oriData = true;
+        		 	initView(data);
         		}, 
         		function(result) {
         		 	console.log( result )
-                    $.mobile.loading( "hide" );
         		}
         	);	
 		}
