@@ -192,13 +192,26 @@
     function hasLogin(){
         window.localStorage.setItem("VERSION",true);
     }
-    
+
+    function showNav(){
+    	$('#global_nav').show();
+    }
+
+    function hideNav(){
+    	$('#global_nav').hide();
+    }
+	$(function() {
+		$( "[data-role='navbar']" ).navbar();
+		$( "[data-role='footer']" ).toolbar();
+	});   
+
     $( document ).on('mobileinit', function(event, ui){
                      
                      
          // 如果第一次登陆，跳转到引导页
          if( isFirstLogin()){
              //$.mobile.autoInitialize = false;
+	     $(hideNav);
              document.location.hash = "#sy";
          }
          else{
@@ -274,7 +287,7 @@
 				</div>
 			</div>
 
-			<p><a href="#gkzy_popup" class="ui-btn ui-shadow ui-corner-all search" data-transition="pop" id="gkzy_search"></a></p>
+			<p><a href="#gkzy_popup" class="ui-btn ui-shadow ui-corner-all search hide-nav" data-transition="pop" id="gkzy_search"></a></p>
 
 			<div id="gkzy_popMsg" data-role="popup" data-overlay-theme="b" data-corners="false">
     			<a class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" href="#" data-rel="back">Close</a>
@@ -283,17 +296,6 @@
 
 		</div>		
 	</div>
-
-	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-1" data-icon="custom">高考导航</a></li>
-				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2" data-icon="custom">就业指导</a></li>
-				<li><a href="#zyjs"  data-transition="slide" class="icon-zlzw icon-3" data-icon="custom">职业入门</a></li>
-				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
-			</ul>
-		</div><!-- /navbar -->
-	</div><!-- /footer -->	
 </div>
 
 <!-- 就业指导  -->
@@ -336,7 +338,7 @@
 				</div>
 			</div>
 
-			<p><a href="#zylj_popup" class="ui-btn ui-shadow ui-corner-all search" data-transition="pop" id="zylj_search"></a></p>
+			<p><a href="#zylj_popup" class="ui-btn ui-shadow ui-corner-all search hide-nav" data-transition="pop" id="zylj_search"></a></p>
 
 			<div id="zylj_popMsg" data-role="popup" data-overlay-theme="b" data-corners="false">
     			<a class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" href="#" data-rel="back">Close</a>
@@ -345,23 +347,12 @@
 
 		</div>		
 	</div>
-
-	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考导航</a></li>
-				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-2"  data-icon="custom">就业指导</a></li>
-				<li><a href="#zyjs" data-transition="slide" class="icon-zlzw icon-3"  data-icon="custom">职业入门</a></li>
-				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
-			</ul>
-		</div><!-- /navbar -->
-	</div><!-- /footer -->	
 </div>
 
-<!-- 就业指导 -->
+<!-- 职业入门 -->
 <div data-role="page" class="bg" id="zyjs">
 	<div data-role="header" data-theme="a">
-		<h1>就业指导</h1>
+		<h1>职业入门</h1>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
@@ -371,17 +362,6 @@
 			</li>
 		</ul>
 	</div>
-
-	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考导航</a></li>
-				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">就业指导</a></li>
-				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-3"  data-icon="custom">职业入门</a></li>
-				<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
-			</ul>
-		</div><!-- /navbar -->
-	</div><!-- /footer -->	
 </div>
 
 <!-- 我 -->
@@ -392,25 +372,24 @@
 
 	<div role="main" class="ui-content">
 		<ul data-role="listview" data-inset="true" id="me_list" >
-			<li><a href="#me_popup" id="about" class＝"me-popup" data-transition="pop">关于我们</a></li>
-			<li><a href="#me_popup" id="contact" class＝"me-popup" data-transition="pop">联系我们</a></li>
-			<li><a href="#me_popup" id="copyright" class＝"me-popup" data-transition="pop">版权说明</a></li>
+			<li><a href="#me_popup" id="about" data-transition="pop">关于我们</a></li>
+			<li><a href="#me_popup" id="contact"  data-transition="pop">联系我们</a></li>
+			<li><a href="#me_popup" id="copyright" data-transition="pop">版权说明</a></li>
 		</ul>
 	</div>
-
-	<div data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#gkzy" data-transition="slide" class="icon-zlzw icon-1" data-icon="custom">高考导航</a></li>
-				<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2"  data-icon="custom">就业指导</a></li>
-				<li><a href="#zyjs" data-transition="slide" class="icon-zlzw icon-3" data-icon="custom">职业入门</a></li>
-				<li><a href="#" class="ui-btn ui-btn-active icon-zlzw icon-4" data-icon="custom">我</a></li>
-			</ul>
-		</div><!-- /navbar -->
-	</div><!-- /footer -->	
 </div>
 
-
+<!-- 底部导航 -->
+<div id="global_nav" data-role="footer" data-position="fixed" data-fullscreen='false' data-theme="b">
+	<div data-role="navbar">
+		<ul>
+			<li><a href="#gkzy" data-transition="slide" class="ui-btn ui-btn-active icon-zlzw icon-1" data-icon="custom">高考导航</a></li>
+			<li><a href="#zylj" data-transition="slide" class="icon-zlzw icon-2" data-icon="custom">就业指导</a></li>
+			<li><a href="#zyjs"  data-transition="slide" class="icon-zlzw icon-3" data-icon="custom">职业入门</a></li>
+			<li><a href="#me" data-transition="slide" class="icon-zlzw icon-4" data-icon="custom">我</a></li>
+		</ul>
+	</div><!-- /navbar -->
+</div><!-- /footer -->	
 
 <!-- 引导页 -->
 <div data-role="page" class="bg" id="sy">
@@ -440,7 +419,7 @@
 
 	<div data-role="header" data-theme="a"  data-position="fixed">
 		<h1 style="margin: 0px; text-align: left; width:100%;">
-            <a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">返回</a>
+            <a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all show-nav">返回</a>
             <a href="#gkzy_share" class="ui-btn ui-icon-wx ui-icon-carat-r ui-btn-icon-notext ui-corner-all" data-rel="popup">分享</a>
         </h1>
 	</div><!-- /header -->
@@ -467,7 +446,7 @@
 
 	<div data-role="header" data-theme="a"  data-position="fixed">
 		<h1 style="margin: 0px; text-align: left; width:100%;">
-            <a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">返回</a>
+            <a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all show-nav">返回</a>
             <a href="#zylj_share" class="ui-btn ui-icon-wx ui-icon-carat-r ui-btn-icon-notext ui-corner-all" data-rel="popup">分享</a>
         </h1>
     </div><!-- /header -->
@@ -488,7 +467,7 @@
 <div data-role="page" id="zyjs_popup" class="bg">
 
 	<div data-role="header" data-theme="a"  data-position="fixed" id="zyjs_popup_header">
-		<a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" style="top:1.5em;"></a>
+		<a href="#gkzy" data-rel="back" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all show-nav" style="top:1.5em;"></a>
 		<h1></h1>
 		<h5></h5>
 	</div><!-- /header -->
@@ -502,7 +481,7 @@
 <div data-role="page" id="me_popup" class="bg" style="background: white!important;">
     
     <div data-role="header" data-theme="a"  data-position="fixed" id="zyjs_popup_header">
-        <a href="#me" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" style="top:1.5em;"></a>
+        <a href="#me" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all show-nav" style="top:1.5em;"></a>
         <h1></h1>
         <h5></h5>
     </div><!-- /header -->
@@ -523,17 +502,18 @@
 
     function showLoading(){
 
-            $.mobile.loading( "show", {
-                text: '正在获取数据，请稍候...',
-                textVisible: 'true',
-                textonly: false,
-                html: ''
-            });
+        $.mobile.loading( "show", {
+            text: '正在获取数据，请稍候...',
+            textVisible: 'true',
+            textonly: false,
+            html: ''
+        });
     }
 
     function hideLoading(){
-	$.mobile.loading('hide');
+		$.mobile.loading('hide');
     }
+
 
 	function getData(id, callbackForSucc, callbackForFail){
 
@@ -577,10 +557,8 @@
 	}
 
     function changeActiveMenu( iconIdx ){
-        
         $('.icon-zlzw').removeClass('ui-btn-active');
         $('.icon-' + iconIdx ).addClass('ui-btn-active');
-  
     }
 
 function refreshSelect(id, items){
@@ -796,9 +774,6 @@ function adjustMePageHeight(){
 		}
 
 		function load(){
-			$('.icon-zlzw').removeClass('ui-btn-active');
-			$('.icon-1').addClass('ui-btn-active');
-
 			if( oriData )return;
 			getData('gkzy', 
 				function(data) {
@@ -1048,9 +1023,6 @@ function adjustMePageHeight(){
 		}
 
 		function load(){
-			$('.icon-zlzw').removeClass('ui-btn-active');
-			$('.icon-2').addClass('ui-btn-active');
-
 			if( oriData )return;
 
 			getData('zylj', 
@@ -1085,7 +1057,7 @@ function adjustMePageHeight(){
 			var lis = '';
 			$.each(contents, function(i, zhiye){
 	
-				lis += '<li><a href="#zyjs_popup" data-transition="pop" class="jump-content" content=' + zhiye.id + '><span class="desc">文章简介：' + zhiye.introduction + '</span><br>'
+				lis += '<li><a href="#zyjs_popup" data-transition="pop" class="jump-content hide-nav" content=' + zhiye.id + '><span class="desc">文章简介：' + zhiye.introduction + '</span><br>'
 					 + '<h1 class="title">' + zhiye.title + '</h1>'
 					 + '<span class="author">作者：' + zhiye.author + '</span></a></li>';
 	
@@ -1114,9 +1086,6 @@ function adjustMePageHeight(){
 		}
 
 		function load(){
-
-			$('.icon-zlzw').removeClass('ui-btn-active');
-			$('.icon-3').addClass('ui-btn-active');
 
 			if( oriData )return;
                        
@@ -1156,9 +1125,6 @@ function adjustMePageHeight(){
 		}
 
 		function load(){
-
-			$('.icon-zlzw').removeClass('ui-btn-active');
-			$('.icon-4').addClass('ui-btn-active');
                      
             if( oriData )return;
             initView();
@@ -1176,6 +1142,18 @@ function adjustMePageHeight(){
 	//---- 事件绑定 ----//
 	$( document ).on('pagechange',function(event, ui){
 		var pid = ui.toPage.attr('id');
+
+		if( pid == 'gkzy' ){
+			changeActiveMenu("1");
+		} else if( pid == 'zylj' ){
+			changeActiveMenu("2");
+		} else if( pid == 'zyjs' ){
+			changeActiveMenu("3");
+		} else if( pid == 'me' ){
+			changeActiveMenu("4");
+		} else if( pid == 'sy' ){
+		}
+
 		console.log( 'pagechange -> ' + pid );
 		if( zlzq.pages[pid] ){
             // 如果是“我”页面，调整弹出页面为60%
@@ -1237,9 +1215,22 @@ function adjustMePageHeight(){
                      
         changeActiveMenu(iconIdx);
     });
+    
+    // 隐藏底部导航栏
+    $( document ).on('tap', '.hide-nav', function(){
+        hideNav();
+    });
+    $( '#me_list' ).on('tap', 'a', function(){
+        hideNav();
+    });    
+    // 显示底部导航栏
+    $( document ).on('tap', '.show-nav', function(){
+        showNav();
+    });
                      
 	// 首页进入
 	$('#enterBtn').on('tap', function(){
+		showNav();
 		console.log( 'enter to main' );
 		hasLogin();
         $('#fp-nav').remove();
