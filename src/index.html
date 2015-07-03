@@ -211,7 +211,6 @@
          // 如果第一次登陆，跳转到引导页
          if( isFirstLogin()){
              //$.mobile.autoInitialize = false;
-	     $(hideNav);
              document.location.hash = "#sy";
          }
          else{
@@ -1170,7 +1169,22 @@ function adjustMePageHeight(){
 
 	});
 
+	//---- 事件绑定 ----//
+	$( document ).on('pagebeforeshow',function(event, ui){
+		var pid = event.target.id;
 
+		if( pid == 'gkzy' ){
+			showNav();
+		} else if( pid == 'zylj' ){
+			showNav();
+		} else if( pid == 'zyjs' ){
+			showNav();
+		} else if( pid == 'me' ){
+			showNav();
+		} else {
+			hideNav();
+		}
+	});
 
 	// 分享
 	$( document ).on('tap', '.ui-icon-wx', function(){
@@ -1215,22 +1229,9 @@ function adjustMePageHeight(){
                      
         changeActiveMenu(iconIdx);
     });
-    
-    // 隐藏底部导航栏
-    $( document ).on('tap', '.hide-nav', function(){
-        hideNav();
-    });
-    $( '#me_list' ).on('tap', 'a', function(){
-        hideNav();
-    });    
-    // 显示底部导航栏
-    $( document ).on('tap', '.show-nav', function(){
-        showNav();
-    });
                      
 	// 首页进入
 	$('#enterBtn').on('tap', function(){
-		showNav();
 		console.log( 'enter to main' );
 		hasLogin();
         $('#fp-nav').remove();
